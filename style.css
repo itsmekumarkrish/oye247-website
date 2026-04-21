@@ -2387,3 +2387,27 @@ body.modal-open {
 .custom-select-wrapper .select-trigger i {
     color: rgba(255, 255, 255, 0.35);
 }
+
+/* --- WhatsApp Hero Button --- */
+.btn-wa {
+    background: #25D366 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.1rem 2.2rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-wa:hover {
+    background: #128C7E !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.btn-wa i {
+    font-size: 1.4rem;
+}
