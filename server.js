@@ -195,7 +195,7 @@ app.use((err, req, res, next) => {
 
 // 8. Make sure there are NO hardcoded ports like 3000 in app.listen
 // 9. Optimize for Render deployment: No localhost dependencies, clean console logs
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`\n🚀 Oye247 server running on port ${PORT}`);
     if (!process.env.SMTP_USER) {
         console.log('⚠️  Email notifications disabled. Add SMTP credentials to .env');
