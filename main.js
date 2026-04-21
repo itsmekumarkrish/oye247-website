@@ -406,6 +406,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- Modal Logic ---
+    const contactModal = document.getElementById('contact-modal');
+    const openModalBtns = document.querySelectorAll('.open-contact-modal');
+    const closeModalBtn = contactModal ? contactModal.querySelector('.modal-close') : null;
+
+    function openModal() {
+        if(contactModal) {
+            contactModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+    }
+
+    function closeModal() {
+        if(contactModal) {
+            contactModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+    }
+
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+    });
+
+    if(closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    // Close on outside click
+    if(contactModal) {
+        contactModal.addEventListener('click', (e) => {
+            if(e.target === contactModal) {
+                closeModal();
+            }
+        });
+    }
+
     // --- Contact Form Logic ---
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('form-submit-btn');

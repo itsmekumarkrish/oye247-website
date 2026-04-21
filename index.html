@@ -59,8 +59,8 @@
                 <h1 class="headline">Automate Your Business.<br><span class="text-gradient">Convert More Customers with AI.</span></h1>
                 <p class="subheadline">Capture every lead, respond instantly, and close more deals with AI-powered automation.</p>
                 <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get Demo <i class="ph ph-arrow-right"></i></a>
-                    <a href="#contact" class="btn btn-secondary">Start Automation</a>
+                    <button class="btn btn-primary open-contact-modal">Get Demo <i class="ph ph-arrow-right"></i></button>
+                    <button class="btn btn-secondary open-contact-modal">Start Automation</button>
                 </div>
             </div>
         </div>
@@ -652,119 +652,17 @@
                 <h2 class="contact-heading">Ready to <span class="text-gradient">Automate Your Business?</span></h2>
                 <p class="contact-subheading">Tell us about your business. We'll create a personalized AI automation plan tailored to your needs.</p>
             </div>
-            <div class="contact-grid">
-                <!-- Left: Value Props -->
-                <div class="contact-value fade-up">
-                    <h3>What You'll Get</h3>
-                    <ul class="value-list">
-                        <li>
-                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
-                            <span>Personalized AI automation plan</span>
-                        </li>
-                        <li>
-                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
-                            <span>Free strategy consultation</span>
-                        </li>
-                        <li>
-                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
-                            <span>WhatsApp + lead automation blueprint</span>
-                        </li>
-                        <li>
-                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
-                            <span>Clear roadmap to increase conversions</span>
-                        </li>
-                        <li>
-                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
-                            <span>No commitment required</span>
-                        </li>
+            <div class="contact-grid" style="grid-template-columns: 1fr; text-align: center; margin-top: 2rem;">
+                <div class="contact-value" style="margin: 0 auto; max-width: 800px; display: flex; flex-direction: column; align-items: center;">
+                    <ul class="value-list" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-bottom: 3.5rem; list-style: none; padding: 0;">
+                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-check-circle value-check"></i> Personalized AI Roadmap</li>
+                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-check-circle value-check"></i> Live Bot Demonstration</li>
+                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-check-circle value-check"></i> ROI Projection</li>
                     </ul>
-                    <div class="contact-trust">
-                        <div class="trust-item">
-                            <i class="ph ph-clock"></i>
-                            <span>Response within 24 hours</span>
-                        </div>
-                        <div class="trust-item">
-                            <i class="ph ph-shield-check"></i>
-                            <span>100% confidential & secure</span>
-                        </div>
-                        <div class="trust-item">
-                            <i class="ph ph-star"></i>
-                            <span>Trusted by 500+ businesses</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Form Card -->
-                <div class="contact-form-card fade-up">
-                    <div id="contact-form-wrap">
-                        <h3 class="form-title">Get Your Automation Plan</h3>
-                        <p class="form-subtitle">Fill in the details below and our team will reach out shortly.</p>
-                        <form id="contact-form" novalidate>
-                            <div class="floating-group">
-                                <input type="text" id="contact-name" name="name" placeholder=" " required>
-                                <label for="contact-name">Full Name <span class="required">*</span></label>
-                                <span class="field-validation"><i class="ph ph-check"></i></span>
-                            </div>
-                            <div class="floating-group">
-                                <input type="tel" id="contact-phone" name="phone" placeholder=" " required>
-                                <label for="contact-phone">Phone Number <span class="required">*</span></label>
-                                <span class="field-validation"><i class="ph ph-check"></i></span>
-                            </div>
-                            <div class="floating-group">
-                                <input type="email" id="contact-email" name="email" placeholder=" ">
-                                <label for="contact-email">Email Address <span class="optional-tag">(optional)</span></label>
-                                <span class="field-validation"><i class="ph ph-check"></i></span>
-                            </div>
-                            <div class="form-row">
-                                <div class="floating-group">
-                                    <select id="contact-business" name="business" required>
-                                        <option value="" disabled selected></option>
-                                        <option value="Real Estate">Real Estate</option>
-                                        <option value="E-commerce">E-commerce</option>
-                                        <option value="Coaching">Coaching</option>
-                                        <option value="Healthcare">Healthcare</option>
-                                        <option value="Agency">Agency</option>
-                                        <option value="Local Business">Local Business</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <label for="contact-business">Business Type</label>
-                                </div>
-                                <div class="floating-group">
-                                    <select id="contact-leads" name="leads">
-                                        <option value="" disabled selected></option>
-                                        <option value="500-1000">500 – 1,000</option>
-                                        <option value="1000-5000">1,000 – 5,000</option>
-                                        <option value="5000-10000">5,000 – 10,000</option>
-                                        <option value="10000+">10,000+</option>
-                                    </select>
-                                    <label for="contact-leads">Monthly Leads</label>
-                                </div>
-                            </div>
-                            <div class="floating-group">
-                                <textarea id="contact-message" name="message" rows="3" placeholder=" "></textarea>
-                                <label for="contact-message">Message <span class="optional-tag">(optional)</span></label>
-                            </div>
-                            <button type="submit" class="btn-gradient" id="form-submit-btn" disabled>
-                                <span id="btn-text">Get Your Automation Plan <i class="ph ph-arrow-right"></i></span>
-                                <span id="btn-loading" style="display:none;"><i class="ph ph-circle-notch ph-spin"></i> Sending...</span>
-                            </button>
-                            <p class="form-micro-trust">
-                                <span><i class="ph ph-lightning"></i> We typically respond within 10 minutes</span>
-                                <span>No spam. 100% secure.</span>
-                            </p>
-                        </form>
-                    </div>
-                    <!-- Success State -->
-                    <div id="contact-success" style="display:none;">
-                        <div class="success-checkmark">
-                            <div class="success-ring"></div>
-                            <i class="ph ph-check"></i>
-                        </div>
-                        <h3>Thank You! 🎉</h3>
-                        <p>Your automation plan request has been received. Our team will contact you shortly to walk you through the next steps.</p>
-                        <a href="https://wa.me/1234567890?text=Hi%2C%20I%20just%20submitted%20my%20automation%20plan%20request.%20Looking%20forward%20to%20connecting!" target="_blank" class="btn-gradient mt-4">
-                            <i class="ph ph-whatsapp-logo"></i> Connect on WhatsApp
-                        </a>
+                    <button class="btn btn-primary open-contact-modal" style="font-size: 1.25rem; padding: 1.2rem 3rem;">Get Your Automation Plan <i class="ph ph-arrow-right"></i></button>
+                    <div class="contact-trust" style="margin-top: 3.5rem; display: flex; justify-content: center; flex-direction: row; gap: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 2.5rem; width: 100%;">
+                        <div class="trust-item" style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-shield-check"></i> <span>100% Secure & Private</span></div>
+                        <div class="trust-item" style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-star"></i> <span>Trusted by 500+ businesses</span></div>
                     </div>
                 </div>
             </div>
@@ -776,7 +674,7 @@
         <div class="container text-center">
             <h2>Ready to <span class="text-gradient">Scale?</span></h2>
             <p>Join futuristic businesses automating their growth today.</p>
-            <a href="#contact" class="btn btn-primary mt-4">Get Your Automation Plan</a>
+            <button class="btn btn-primary mt-4 open-contact-modal">Get Your Automation Plan</button>
         </div>
     </section>
 
@@ -858,5 +756,84 @@
 
     <!-- Scripts -->
     <script src="main.js"></script>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="contact-modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal"><i class="ph ph-x"></i></button>
+            <div class="contact-form-card">
+                <div id="contact-form-wrap">
+                    <h3 class="form-title">Get Your Automation Plan</h3>
+                    <p class="form-subtitle">Fill in the details below and our team will reach out shortly.</p>
+                    <form id="contact-form" novalidate>
+                        <div class="floating-group">
+                            <input type="text" id="contact-name" name="name" placeholder=" " required>
+                            <label for="contact-name">Full Name <span class="required">*</span></label>
+                            <span class="field-validation"><i class="ph ph-check"></i></span>
+                        </div>
+                        <div class="floating-group">
+                            <input type="tel" id="contact-phone" name="phone" placeholder=" " required>
+                            <label for="contact-phone">Phone Number <span class="required">*</span></label>
+                            <span class="field-validation"><i class="ph ph-check"></i></span>
+                        </div>
+                        <div class="floating-group">
+                            <input type="email" id="contact-email" name="email" placeholder=" ">
+                            <label for="contact-email">Email Address <span class="optional-tag">(optional)</span></label>
+                            <span class="field-validation"><i class="ph ph-check"></i></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="floating-group">
+                                <select id="contact-business" name="business" required>
+                                    <option value="" disabled selected></option>
+                                    <option value="Real Estate">Real Estate</option>
+                                    <option value="E-commerce">E-commerce</option>
+                                    <option value="Coaching">Coaching</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Agency">Agency</option>
+                                    <option value="Local Business">Local Business</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <label for="contact-business">Business Type</label>
+                            </div>
+                            <div class="floating-group">
+                                <select id="contact-leads" name="leads">
+                                    <option value="" disabled selected></option>
+                                    <option value="500-1000">500 – 1,000</option>
+                                    <option value="1000-5000">1,000 – 5,000</option>
+                                    <option value="5000-10000">5,000 – 10,000</option>
+                                    <option value="10000+">10,000+</option>
+                                </select>
+                                <label for="contact-leads">Monthly Leads</label>
+                            </div>
+                        </div>
+                        <div class="floating-group">
+                            <textarea id="contact-message" name="message" rows="3" placeholder=" "></textarea>
+                            <label for="contact-message">Message <span class="optional-tag">(optional)</span></label>
+                        </div>
+                        <button type="submit" class="btn-gradient" id="form-submit-btn" disabled>
+                            <span id="btn-text">Get Your Automation Plan <i class="ph ph-arrow-right"></i></span>
+                            <span id="btn-loading" style="display:none;"><i class="ph ph-circle-notch ph-spin"></i> Sending...</span>
+                        </button>
+                        <p class="form-micro-trust">
+                            <span><i class="ph ph-lightning"></i> We typically respond within 10 minutes</span>
+                            <span>No spam. 100% secure.</span>
+                        </p>
+                    </form>
+                </div>
+                <!-- Success State -->
+                <div id="contact-success" style="display:none;">
+                    <div class="success-checkmark">
+                        <div class="success-ring"></div>
+                        <i class="ph ph-check"></i>
+                    </div>
+                    <h3>Thank You! 🎉</h3>
+                    <p>Your automation plan request has been received. Our team will contact you shortly to walk you through the next steps.</p>
+                    <a href="https://wa.me/1234567890?text=Hi%2C%20I%20just%20submitted%20my%20automation%20plan%20request.%20Looking%20forward%20to%20connecting!" target="_blank" class="btn-gradient mt-4">
+                        <i class="ph ph-whatsapp-logo"></i> Connect on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
