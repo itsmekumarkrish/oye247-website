@@ -17,6 +17,13 @@ app.use(express.static(path.join(__dirname)));
 // Health check for Railway
 app.get('/health', (req, res) => res.status(200).send('OK'));
 
+// Legal & Contact Pages
+app.get('/privacy-policy', (req, res) => res.sendFile(path.join(__dirname, 'privacy-policy.html')));
+app.get('/terms-of-service', (req, res) => res.sendFile(path.join(__dirname, 'terms-of-service.html')));
+app.get('/refund-policy', (req, res) => res.sendFile(path.join(__dirname, 'refund-policy.html')));
+app.get('/disclaimer', (req, res) => res.sendFile(path.join(__dirname, 'disclaimer.html')));
+app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
+
 
 // 3. Ensure MongoDB connection uses process.env.MONGO_URI and handles errors gracefully
 if (process.env.MONGO_URI) {
