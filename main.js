@@ -463,129 +463,123 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- AI Smart Input Logic ---
-    const businessRawInput = document.getElementById('business-raw-input');
-    const aiDetectedCategory = document.getElementById('ai-detected-category');
-    const aiSuggestionsBox = document.getElementById('ai-suggestions');
-    const aiList = document.getElementById('ai-list');
-    const quickChips = document.getElementById('quick-chips');
+    // --- AI Smart Input Logic (Refactored for Multiple Instances) ---
+    function initSmartInput(container) {
+        const rawInput = container.querySelector('input[type="text"]');
+        const detectedInput = container.querySelector('input[type="hidden"]');
+        const suggestionsBox = container.querySelector('.ai-suggestions-box');
+        const list = container.querySelector('.suggestion-list');
+        const chips = container.querySelector('.quick-suggestions');
 
-    const businessDictionary = {
-        'Real Estate': ['home', 'house', 'property', 'realtor', 'agent', 'broker', 'land', 'apartment'],
-        'E-commerce': ['store', 'shop', 'online', 'sell', 'product', 'clothes', 'ecommerce', 'dropshipping'],
-        'SaaS / Software': ['app', 'software', 'platform', 'tech', 'saas', 'startup', 'web', 'dev'],
-        'Marketing Agency': ['ads', 'marketing', 'social', 'branding', 'agency', 'seo', 'leads'],
-        'Healthcare': ['doctor', 'clinic', 'medical', 'health', 'dental', 'patient', 'hospital'],
-        'Law Firm': ['law', 'legal', 'attorney', 'lawyer', 'firm', 'court'],
-        'Restaurant': ['food', 'cafe', 'restaurant', 'coffee', 'bakery', 'kitchen', 'delivery'],
-        'Fitness / Gym': ['gym', 'fitness', 'workout', 'trainer', 'coach', 'yoga', 'studio'],
-        'Education / Coaching': ['school', 'coach', 'teaching', 'online course', 'training', 'institute', 'tutor'],
-        'Logistics / Transport': ['delivery', 'transport', 'shipping', 'truck', 'warehouse', 'logistics']
-    };
+        const businessDictionary = {
+            'Real Estate': ['home', 'house', 'property', 'realtor', 'agent', 'broker', 'land', 'apartment'],
+            'E-commerce': ['store', 'shop', 'online', 'sell', 'product', 'clothes', 'ecommerce', 'dropshipping'],
+            'SaaS / Software': ['app', 'software', 'platform', 'tech', 'saas', 'startup', 'web', 'dev'],
+            'Marketing Agency': ['ads', 'marketing', 'social', 'branding', 'agency', 'seo', 'leads'],
+            'Healthcare': ['doctor', 'clinic', 'medical', 'health', 'dental', 'patient', 'hospital'],
+            'Law Firm': ['law', 'legal', 'attorney', 'lawyer', 'firm', 'court'],
+            'Restaurant': ['food', 'cafe', 'restaurant', 'coffee', 'bakery', 'kitchen', 'delivery'],
+            'Fitness / Gym': ['gym', 'fitness', 'workout', 'trainer', 'coach', 'yoga', 'studio'],
+            'Education / Coaching': ['school', 'coach', 'teaching', 'online course', 'training', 'institute', 'tutor'],
+            'Logistics / Transport': ['delivery', 'transport', 'shipping', 'truck', 'warehouse', 'logistics']
+        };
 
-    function getAiSuggestions(query) {
-        if (!query || query.length < 2) return [];
-        const normalized = query.toLowerCase();
-        const matches = [];
-
-        for (const [category, keywords] of Object.entries(businessDictionary)) {
-            let score = 0;
-            if (category.toLowerCase().includes(normalized)) score += 10;
-            keywords.forEach(kw => {
-                if (normalized.includes(kw)) score += 5;
-                if (kw.includes(normalized)) score += 2;
-            });
-
-            if (score > 0) {
-                matches.push({ category, score });
+        function getAiSuggestions(query) {
+            if (!query || query.length < 2) return [];
+            const normalized = query.toLowerCase();
+            const matches = [];
+            for (const [category, keywords] of Object.entries(businessDictionary)) {
+                let score = 0;
+                if (category.toLowerCase().includes(normalized)) score += 10;
+                keywords.forEach(kw => {
+                    if (normalized.includes(kw)) score += 5;
+                    if (kw.includes(normalized)) score += 2;
+                });
+                if (score > 0) matches.push({ category, score });
             }
+            return matches.sort((a, b) => b.score - a.score).slice(0, 5);
         }
 
-        return matches.sort((a, b) => b.score - a.score).slice(0, 5);
+        if (rawInput) {
+            rawInput.addEventListener('input', (e) => {
+                const query = e.target.value;
+                if (query.length > 0) chips?.classList.add('hidden');
+                else chips?.classList.remove('hidden');
+
+                const suggestions = getAiSuggestions(query);
+                if (suggestions.length > 0) {
+                    list.innerHTML = suggestions.map(s => `
+                        <li class="suggestion-item" data-category="${s.category}">
+                            <span>${s.category.replace(new RegExp(query, 'gi'), match => `<strong>${match}</strong>`)}</span>
+                            <span class="match-percent">${Math.min(99, 70 + s.score)}% match</span>
+                        </li>
+                    `).join('');
+                    suggestionsBox.classList.add('active');
+                } else {
+                    suggestionsBox.classList.remove('active');
+                }
+                detectedInput.value = suggestions.length > 0 ? suggestions[0].category : 'Other';
+                checkFormValidity(container.closest('form'));
+            });
+
+            list?.addEventListener('click', (e) => {
+                const item = e.target.closest('.suggestion-item');
+                if (item) {
+                    const cat = item.getAttribute('data-category');
+                    rawInput.value = cat;
+                    detectedInput.value = cat;
+                    suggestionsBox.classList.remove('active');
+                    container.closest('.floating-group')?.classList.add('valid');
+                    checkFormValidity(container.closest('form'));
+                }
+            });
+
+            chips?.addEventListener('click', (e) => {
+                const chip = e.target.closest('.chip');
+                if (chip) {
+                    const val = chip.textContent;
+                    rawInput.value = val;
+                    detectedInput.value = val;
+                    chips.classList.add('hidden');
+                    container.closest('.floating-group')?.classList.add('valid');
+                    checkFormValidity(container.closest('form'));
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!rawInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                    suggestionsBox.classList.remove('active');
+                }
+            });
+        }
     }
 
-    if (businessRawInput) {
-        businessRawInput.addEventListener('input', (e) => {
-            const query = e.target.value;
-            
-            // Hide quick chips when typing starts
-            if (query.length > 0) {
-                quickChips.classList.add('hidden');
-            } else {
-                quickChips.classList.remove('hidden');
-            }
+    document.querySelectorAll('.smart-ai-input-wrapper').forEach(initSmartInput);
 
-            const suggestions = getAiSuggestions(query);
-            
-            if (suggestions.length > 0) {
-                aiList.innerHTML = suggestions.map(s => `
-                    <li class="suggestion-item" data-category="${s.category}">
-                        <span>${s.category.replace(new RegExp(query, 'gi'), match => `<strong>${match}</strong>`)}</span>
-                        <span class="match-percent">${Math.min(99, 70 + s.score)}% match</span>
-                    </li>
-                `).join('');
-                aiSuggestionsBox.classList.add('active');
-            } else {
-                aiSuggestionsBox.classList.remove('active');
-            }
-
-            // Update hidden input with top suggestion if any, or raw input
-            aiDetectedCategory.value = suggestions.length > 0 ? suggestions[0].category : 'Other / Manual';
-            checkFormValidity();
-        });
-
-        // Click a suggestion
-        aiList.addEventListener('click', (e) => {
-            const item = e.target.closest('.suggestion-item');
-            if (item) {
-                const category = item.getAttribute('data-category');
-                businessRawInput.value = category;
-                aiDetectedCategory.value = category;
-                aiSuggestionsBox.classList.remove('active');
-                const group = businessRawInput.closest('.floating-group');
-                if (group) group.classList.add('valid');
-                checkFormValidity();
-            }
-        });
-
-        // Click outside to close
-        document.addEventListener('click', (e) => {
-            if (!businessRawInput.contains(e.target) && !aiSuggestionsBox.contains(e.target)) {
-                aiSuggestionsBox.classList.remove('active');
-            }
-        });
-    }
-
-    // Quick Chips click
-    if (quickChips) {
-        quickChips.addEventListener('click', (e) => {
-            const chip = e.target.closest('.chip');
-            if (chip) {
-                const value = chip.textContent;
-                businessRawInput.value = value;
-                aiDetectedCategory.value = value;
-                quickChips.classList.add('hidden');
-                const group = businessRawInput.closest('.floating-group');
-                if (group) group.classList.add('valid');
-                checkFormValidity();
-            }
-        });
-    }
-
-    // --- Contact Form Logic ---
-    const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('form-submit-btn');
-    const btnText = document.getElementById('btn-text');
-    const btnLoading = document.getElementById('btn-loading');
-    const formWrap = document.getElementById('contact-form-wrap');
-    const successWrap = document.getElementById('contact-success');
-    const nameInput = document.getElementById('contact-name');
-    const phoneInput = document.getElementById('contact-phone');
-    const emailInput = document.getElementById('contact-email');
-
-    // Validation helpers
+    // --- Unified Validation Logic ---
     function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function checkFormValidity(form) {
+        if (!form) return;
+        const nameInput = form.querySelector('input[name="name"]');
+        const phoneInput = form.querySelector('input[name="phone"]');
+        const emailInput = form.querySelector('input[name="email"]');
+        const aiCategory = form.querySelector('input[name="business_category"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        const nameValid = nameInput && nameInput.value.trim().length >= 2;
+        const phoneValid = phoneInput && phoneInput.value.trim().length >= 6;
+        const businessValid = aiCategory && aiCategory.value !== "";
+
+        if (nameInput) updateFieldValidation(nameInput, nameValid);
+        if (phoneInput) updateFieldValidation(phoneInput, phoneValid);
+        if (emailInput) updateFieldValidation(emailInput, emailInput.value.trim() === '' || isValidEmail(emailInput.value.trim()));
+
+        if (submitBtn) {
+            submitBtn.disabled = !(nameValid && phoneValid && businessValid);
+        }
     }
 
     function updateFieldValidation(input, isValid) {
@@ -598,6 +592,16 @@ document.addEventListener('DOMContentLoaded', () => {
             group.classList.remove('valid');
         }
     }
+
+    // Attach listeners to all forms
+    document.querySelectorAll('form').forEach(form => {
+        form.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => checkFormValidity(form));
+        });
+        form.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', () => checkFormValidity(form));
+        });
+    });
 
     // Enable/disable submit button + update checkmarks
     function checkFormValidity() {
@@ -643,39 +647,39 @@ document.addEventListener('DOMContentLoaded', () => {
         emailInput.addEventListener('input', checkFormValidity);
     }
 
-    // Form submission
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
+    // --- Unified Form Submission Logic ---
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Collect form data
+            const nameInput = form.querySelector('input[name="name"]');
+            const phoneInput = form.querySelector('input[name="phone"]');
+            const emailInput = form.querySelector('input[name="email"]');
+            const businessRaw = form.querySelector('input[name="business_description"]');
+            const businessCat = form.querySelector('input[name="business_category"]');
+            const leadsSelect = form.querySelector('select[name="leads"]');
+            const messageInput = form.querySelector('textarea[name="message"]');
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const btnText = submitBtn?.querySelector('#btn-text') || submitBtn;
+            const btnLoading = submitBtn?.querySelector('#btn-loading');
+
             const formData = {
-                name: nameInput.value.trim(),
-                phone: phoneInput.value.trim(),
+                name: nameInput?.value.trim(),
+                phone: phoneInput?.value.trim(),
                 email: emailInput?.value.trim() || '',
-                business: document.getElementById('contact-business')?.value || '',
-                leads: document.getElementById('contact-leads')?.value || '',
-                message: document.getElementById('contact-message')?.value.trim() || ''
+                business_raw: businessRaw?.value.trim() || '',
+                business_category: businessCat?.value || '',
+                leads: leadsSelect?.value || '',
+                message: messageInput?.value.trim() || ''
             };
 
-            // Validate required
-            let hasError = false;
-            if (!formData.name) {
-                nameInput.classList.add('error');
-                nameInput.closest('.floating-group')?.classList.remove('valid');
-                hasError = true;
+            // Loading state
+            if (btnLoading) {
+                if (btnText) btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-flex';
             }
-            if (!formData.phone) {
-                phoneInput.classList.add('error');
-                phoneInput.closest('.floating-group')?.classList.remove('valid');
-                hasError = true;
-            }
-            if (hasError) return;
-
-            // Show loading state
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline-flex';
-            submitBtn.disabled = true;
+            if (submitBtn) submitBtn.disabled = true;
 
             try {
                 const response = await fetch('http://localhost:3000/api/contact', {
@@ -685,18 +689,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (response.ok) {
-                    formWrap.style.display = 'none';
-                    successWrap.style.display = 'block';
+                    showSuccess(form);
                 } else {
                     throw new Error('Server error');
                 }
             } catch (err) {
-                // Frontend-only fallback: show success even if backend is offline
-                formWrap.style.display = 'none';
-                successWrap.style.display = 'block';
-                console.log('Form submitted (backend offline, data logged):', formData);
+                // Fallback for offline/local development
+                showSuccess(form);
+                console.log('Form submitted (Offline):', formData);
             }
         });
+    });
+
+    function showSuccess(form) {
+        // If modal form
+        if (form.id === 'contact-form') {
+            const formWrap = document.getElementById('contact-form-wrap');
+            const successWrap = document.getElementById('contact-success');
+            if (formWrap) formWrap.style.display = 'none';
+            if (successWrap) successWrap.style.display = 'block';
+        } else {
+            // Static form - replace with message
+            const card = form.closest('.contact-form-card');
+            if (card) {
+                card.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div class="success-checkmark" style="margin-bottom: 1.5rem;">
+                            <div class="success-ring"></div>
+                            <i class="ph ph-check" style="font-size: 2rem; color: var(--accent-teal);"></i>
+                        </div>
+                        <h3 style="margin-bottom: 1rem;">Success! 🎉</h3>
+                        <p style="color: rgba(255,255,255,0.7);">Your automation plan request has been received. We'll be in touch shortly!</p>
+                    </div>
+                `;
+            }
+        }
     }
 });
 
