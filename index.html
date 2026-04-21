@@ -679,29 +679,29 @@
                 </div>
 
                 <!-- Right Column: Form -->
-                <div class="contact-form-card fade-up" style="padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; backdrop-filter: blur(10px);">
-                    <div class="form-header" style="margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.6rem; margin-bottom: 0.5rem; color: #fff;">Get Your Automation Plan</h3>
-                        <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Fill in the details below and our team will reach out shortly.</p>
+                <div class="contact-form-card fade-up" style="padding: 1.8rem 2.2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; backdrop-filter: blur(10px);">
+                    <div class="form-header" style="margin-bottom: 1.2rem;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.25rem; color: #fff;">Get Your Automation Plan</h3>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Fill in the details below and we'll reach out.</p>
                     </div>
                     <form id="contact-form-static" class="static-form" novalidate>
-                        <div class="floating-group">
-                            <input type="text" name="name" placeholder=" " required>
+                        <div class="floating-group" style="margin-bottom: 1.2rem;">
+                            <input type="text" name="name" placeholder=" " required style="padding: 0.8rem 1rem;">
                             <label>Full Name <span class="required">*</span></label>
                         </div>
-                        <div class="floating-group">
-                            <input type="tel" name="phone" placeholder=" " required>
+                        <div class="floating-group" style="margin-bottom: 1.2rem;">
+                            <input type="tel" name="phone" placeholder=" " required style="padding: 0.8rem 1rem;">
                             <label>Phone Number <span class="required">*</span></label>
                         </div>
-                        <div class="floating-group">
-                            <input type="email" name="email" placeholder=" ">
+                        <div class="floating-group" style="margin-bottom: 1.2rem;">
+                            <input type="email" name="email" placeholder=" " style="padding: 0.8rem 1rem;">
                             <label>Email Address <span class="optional-tag">(optional)</span></label>
                         </div>
-                        <div class="form-row">
+                        <div class="form-row" style="gap: 1rem; margin-bottom: 1.2rem;">
                             <div class="floating-group custom-select-group">
                                 <div class="custom-select-wrapper">
                                     <input type="hidden" name="business" required>
-                                    <div class="select-trigger">
+                                    <div class="select-trigger" style="padding: 0.8rem 1rem;">
                                         <span class="trigger-text">Business Type</span>
                                         <i class="ph ph-caret-down"></i>
                                     </div>
@@ -724,7 +724,7 @@
                                 </div>
                             </div>
                             <div class="floating-group">
-                                <select name="leads">
+                                <select name="leads" style="padding: 0.8rem 1rem;">
                                     <option value="" disabled selected></option>
                                     <option value="Under 500">Under 500</option>
                                     <option value="500-1000">500 – 1,000</option>
@@ -734,11 +734,11 @@
                                 <label>Monthly Leads</label>
                             </div>
                         </div>
-                        <div class="floating-group" style="margin-top: 1rem;">
-                            <textarea name="message" rows="1" placeholder=" " style="min-height: 80px;"></textarea>
+                        <div class="floating-group" style="margin-top: 0;">
+                            <textarea name="message" rows="1" placeholder=" " style="min-height: 50px; padding: 0.8rem 1rem;"></textarea>
                             <label>Message <span class="optional-tag">(optional)</span></label>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; justify-content: center;" disabled>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.9rem; justify-content: center;" disabled>
                             Get Your Automation Plan <i class="ph ph-arrow-right"></i>
                         </button>
                     </form>
