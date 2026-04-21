@@ -785,10 +785,11 @@
                             <span class="field-validation"><i class="ph ph-check"></i></span>
                         </div>
                         <div class="form-row">
+                            <div class="floating-group custom-select-group" id="business-floating-group">
                                 <div class="custom-select-wrapper" id="business-select-wrapper">
                                     <input type="hidden" name="business" id="selected-business-type" required>
                                     <div class="select-trigger">
-                                        <span class="trigger-text">Select Business Type</span>
+                                        <span class="trigger-text"></span>
                                         <i class="ph ph-caret-down"></i>
                                     </div>
                                     <div class="select-dropdown">
@@ -1067,10 +1068,11 @@
                                         <div class="no-results">No matches found.</div>
                                     </div>
                                 </div>
-                                <div class="other-business-container" id="other-business-wrap">
-                                    <input type="text" class="other-business-input" id="other-business-input" placeholder="Enter your business type">
-                                </div>
-                                <label style="display:none;">Business Type</label>
+                                <label for="selected-business-type">Business Type</label>
+                            </div>
+                            <div class="other-business-container" id="other-business-wrap">
+                                <input type="text" class="other-business-input" id="other-business-input" placeholder="Enter your business type">
+                            </div>
                             <div class="floating-group">
                                 <select id="contact-leads" name="leads">
                                     <option value="" disabled selected></option>

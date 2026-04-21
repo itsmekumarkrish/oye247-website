@@ -520,6 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectTrigger.style.borderColor = 'rgba(20, 241, 217, 0.3)';
             }
             
+            const group = selectWrapper.closest('.floating-group');
             // Handle "Other" selection
             if (value === 'Other') {
                 if (otherBusinessWrap) otherBusinessWrap.classList.add('active');
@@ -527,9 +528,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     otherBusinessInput.focus();
                     if (hiddenInput) hiddenInput.value = otherBusinessInput.value;
                 }
+                if (group) group.classList.add('valid');
             } else {
                 if (otherBusinessWrap) otherBusinessWrap.classList.remove('active');
                 if (hiddenInput) hiddenInput.value = value;
+                if (group) group.classList.add('valid');
             }
 
             checkFormValidity();
