@@ -463,98 +463,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- AI Smart Input Logic (Refactored for Multiple Instances) ---
-    function initSmartInput(container) {
-        const rawInput = container.querySelector('input[type="text"]');
-        const detectedInput = container.querySelector('input[type="hidden"]');
-        const suggestionsBox = container.querySelector('.ai-suggestions-box');
-        const list = container.querySelector('.suggestion-list');
-        const chips = container.querySelector('.quick-suggestions');
+    // --- Searchable Dropdown Logic (Refactored for Multiple Instances) ---
+    function initClassicDropdown(wrapper) {
+        const trigger = wrapper.querySelector('.select-trigger');
+        const dropdown = wrapper.querySelector('.select-dropdown');
+        const searchInput = wrapper.querySelector('.select-search-input');
+        const optionsList = wrapper.querySelectorAll('.select-option');
+        const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+        const triggerText = trigger?.querySelector('.trigger-text');
+        
+        const form = wrapper.closest('form');
+        const otherWrap = form?.querySelector('.other-business-container');
+        const otherInput = form?.querySelector('.other-business-input');
 
-        const businessDictionary = {
-            'Real Estate': ['home', 'house', 'property', 'realtor', 'agent', 'broker', 'land', 'apartment'],
-            'E-commerce': ['store', 'shop', 'online', 'sell', 'product', 'clothes', 'ecommerce', 'dropshipping'],
-            'SaaS / Software': ['app', 'software', 'platform', 'tech', 'saas', 'startup', 'web', 'dev'],
-            'Marketing Agency': ['ads', 'marketing', 'social', 'branding', 'agency', 'seo', 'leads'],
-            'Healthcare': ['doctor', 'clinic', 'medical', 'health', 'dental', 'patient', 'hospital'],
-            'Law Firm': ['law', 'legal', 'attorney', 'lawyer', 'firm', 'court'],
-            'Restaurant': ['food', 'cafe', 'restaurant', 'coffee', 'bakery', 'kitchen', 'delivery'],
-            'Fitness / Gym': ['gym', 'fitness', 'workout', 'trainer', 'coach', 'yoga', 'studio'],
-            'Education / Coaching': ['school', 'coach', 'teaching', 'online course', 'training', 'institute', 'tutor'],
-            'Logistics / Transport': ['delivery', 'transport', 'shipping', 'truck', 'warehouse', 'logistics']
-        };
-
-        function getAiSuggestions(query) {
-            if (!query || query.length < 2) return [];
-            const normalized = query.toLowerCase();
-            const matches = [];
-            for (const [category, keywords] of Object.entries(businessDictionary)) {
-                let score = 0;
-                if (category.toLowerCase().includes(normalized)) score += 10;
-                keywords.forEach(kw => {
-                    if (normalized.includes(kw)) score += 5;
-                    if (kw.includes(normalized)) score += 2;
+        if (trigger) {
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Close others
+                document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+                    if (w !== wrapper) w.classList.remove('active');
                 });
-                if (score > 0) matches.push({ category, score });
-            }
-            return matches.sort((a, b) => b.score - a.score).slice(0, 5);
+                wrapper.classList.toggle('active');
+                if (wrapper.classList.contains('active') && searchInput) {
+                    searchInput.focus();
+                }
+            });
         }
 
-        if (rawInput) {
-            rawInput.addEventListener('input', (e) => {
-                const query = e.target.value;
-                if (query.length > 0) chips?.classList.add('hidden');
-                else chips?.classList.remove('hidden');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const filter = e.target.value.toLowerCase();
+                let hasResults = false;
+                optionsList.forEach(option => {
+                    const text = option.textContent.toLowerCase();
+                    if (text.includes(filter)) {
+                        option.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
+                const noResults = wrapper.querySelector('.no-results');
+                if (noResults) noResults.style.display = hasResults ? 'none' : 'block';
+            });
+            searchInput.addEventListener('click', (e) => e.stopPropagation());
+        }
 
-                const suggestions = getAiSuggestions(query);
-                if (suggestions.length > 0) {
-                    list.innerHTML = suggestions.map(s => `
-                        <li class="suggestion-item" data-category="${s.category}">
-                            <span>${s.category.replace(new RegExp(query, 'gi'), match => `<strong>${match}</strong>`)}</span>
-                            <span class="match-percent">${Math.min(99, 70 + s.score)}% match</span>
-                        </li>
-                    `).join('');
-                    suggestionsBox.classList.add('active');
+        optionsList.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const value = option.getAttribute('data-value');
+                const text = option.textContent;
+
+                if (triggerText) triggerText.textContent = text;
+                if (trigger) trigger.style.borderColor = 'rgba(20, 241, 217, 0.3)';
+                
+                const group = wrapper.closest('.floating-group');
+                if (value === 'Other') {
+                    if (otherWrap) otherWrap.classList.add('active');
+                    if (otherInput) {
+                        otherInput.focus();
+                        if (hiddenInput) hiddenInput.value = otherInput.value;
+                    }
+                    if (group) group.classList.add('valid');
                 } else {
-                    suggestionsBox.classList.remove('active');
+                    if (otherWrap) otherWrap.classList.remove('active');
+                    if (hiddenInput) hiddenInput.value = value;
+                    if (group) group.classList.add('valid');
                 }
-                detectedInput.value = suggestions.length > 0 ? suggestions[0].category : 'Other';
-                checkFormValidity(container.closest('form'));
-            });
 
-            list?.addEventListener('click', (e) => {
-                const item = e.target.closest('.suggestion-item');
-                if (item) {
-                    const cat = item.getAttribute('data-category');
-                    rawInput.value = cat;
-                    detectedInput.value = cat;
-                    suggestionsBox.classList.remove('active');
-                    container.closest('.floating-group')?.classList.add('valid');
-                    checkFormValidity(container.closest('form'));
-                }
+                checkFormValidity(form);
+                wrapper.classList.remove('active');
+                optionsList.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
             });
+        });
 
-            chips?.addEventListener('click', (e) => {
-                const chip = e.target.closest('.chip');
-                if (chip) {
-                    const val = chip.textContent;
-                    rawInput.value = val;
-                    detectedInput.value = val;
-                    chips.classList.add('hidden');
-                    container.closest('.floating-group')?.classList.add('valid');
-                    checkFormValidity(container.closest('form'));
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!rawInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
-                    suggestionsBox.classList.remove('active');
+        if (otherInput) {
+            otherInput.addEventListener('input', () => {
+                if (hiddenInput) {
+                    hiddenInput.value = otherInput.value;
+                    checkFormValidity(form);
                 }
             });
         }
     }
 
-    document.querySelectorAll('.smart-ai-input-wrapper').forEach(initSmartInput);
+    document.querySelectorAll('.custom-select-wrapper').forEach(initClassicDropdown);
+
+    // Close all on outside click
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('active'));
+    });
 
     // --- Unified Validation Logic ---
     function isValidEmail(email) {
@@ -566,12 +566,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameInput = form.querySelector('input[name="name"]');
         const phoneInput = form.querySelector('input[name="phone"]');
         const emailInput = form.querySelector('input[name="email"]');
-        const aiCategory = form.querySelector('input[name="business_category"]');
+        const businessInput = form.querySelector('input[name="business"]');
         const submitBtn = form.querySelector('button[type="submit"]');
 
         const nameValid = nameInput && nameInput.value.trim().length >= 2;
         const phoneValid = phoneInput && phoneInput.value.trim().length >= 6;
-        const businessValid = aiCategory && aiCategory.value !== "";
+        const businessValid = businessInput && businessInput.value !== "";
 
         if (nameInput) updateFieldValidation(nameInput, nameValid);
         if (phoneInput) updateFieldValidation(phoneInput, phoneValid);
@@ -603,76 +603,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Enable/disable submit button + update checkmarks
-    function checkFormValidity() {
-        const nameValid = nameInput && nameInput.value.trim().length >= 2;
-        const phoneValid = phoneInput && phoneInput.value.trim().length >= 6;
-        const businessValid = aiDetectedCategory && aiDetectedCategory.value !== "";
-        
-        if (nameInput) updateFieldValidation(nameInput, nameValid);
-        if (phoneInput) updateFieldValidation(phoneInput, phoneValid);
-        if (emailInput) updateFieldValidation(emailInput, emailInput.value.trim() === '' || isValidEmail(emailInput.value.trim()));
-        
-        // Custom validation for AI field
-        if (businessRawInput) {
-            const group = businessRawInput.closest('.floating-group');
-            if (group) {
-                if (businessValid && businessRawInput.value.trim().length > 0) {
-                    group.classList.add('valid');
-                } else {
-                    group.classList.remove('valid');
-                }
-            }
-        }
-
-        if (submitBtn) {
-            submitBtn.disabled = !(nameValid && phoneValid && businessValid);
-        }
-    }
-
-    // Listen for input on all fields
-    if (nameInput) {
-        nameInput.addEventListener('input', () => {
-            nameInput.classList.remove('error');
-            checkFormValidity();
-        });
-    }
-    if (phoneInput) {
-        phoneInput.addEventListener('input', () => {
-            phoneInput.classList.remove('error');
-            checkFormValidity();
-        });
-    }
-    if (emailInput) {
-        emailInput.addEventListener('input', checkFormValidity);
-    }
-
     // --- Unified Form Submission Logic ---
     document.querySelectorAll('form').forEach(form => {
         form.addEventListener('submit', async (e) => {
+            if (form.id === 'chatbot-form') return; // skip chatbot for now
             e.preventDefault();
 
-            const nameInput = form.querySelector('input[name="name"]');
-            const phoneInput = form.querySelector('input[name="phone"]');
-            const emailInput = form.querySelector('input[name="email"]');
-            const businessRaw = form.querySelector('input[name="business_description"]');
-            const businessCat = form.querySelector('input[name="business_category"]');
-            const leadsSelect = form.querySelector('select[name="leads"]');
-            const messageInput = form.querySelector('textarea[name="message"]');
-            
             const submitBtn = form.querySelector('button[type="submit"]');
             const btnText = submitBtn?.querySelector('#btn-text') || submitBtn;
             const btnLoading = submitBtn?.querySelector('#btn-loading');
 
-            const formData = {
-                name: nameInput?.value.trim(),
-                phone: phoneInput?.value.trim(),
-                email: emailInput?.value.trim() || '',
-                business_raw: businessRaw?.value.trim() || '',
-                business_category: businessCat?.value || '',
-                leads: leadsSelect?.value || '',
-                message: messageInput?.value.trim() || ''
-            };
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
             // Loading state
             if (btnLoading) {
@@ -685,7 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('http://localhost:3000/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(data)
                 });
 
                 if (response.ok) {
@@ -694,32 +636,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('Server error');
                 }
             } catch (err) {
-                // Fallback for offline/local development
                 showSuccess(form);
-                console.log('Form submitted (Offline):', formData);
+                console.log('Form submitted (Offline):', data);
             }
         });
     });
 
     function showSuccess(form) {
-        // If modal form
         if (form.id === 'contact-form') {
             const formWrap = document.getElementById('contact-form-wrap');
             const successWrap = document.getElementById('contact-success');
             if (formWrap) formWrap.style.display = 'none';
             if (successWrap) successWrap.style.display = 'block';
         } else {
-            // Static form - replace with message
-            const card = form.closest('.contact-form-card');
+            const card = form.closest('.contact-form-card') || form.parentElement;
             if (card) {
                 card.innerHTML = `
                     <div style="text-align: center; padding: 2rem;">
-                        <div class="success-checkmark" style="margin-bottom: 1.5rem;">
-                            <div class="success-ring"></div>
-                            <i class="ph ph-check" style="font-size: 2rem; color: var(--accent-teal);"></i>
-                        </div>
-                        <h3 style="margin-bottom: 1rem;">Success! 🎉</h3>
-                        <p style="color: rgba(255,255,255,0.7);">Your automation plan request has been received. We'll be in touch shortly!</p>
+                        <i class="ph ph-check-circle" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem; display: block;"></i>
+                        <h3>Success! 🎉</h3>
+                        <p style="color: rgba(255,255,255,0.7);">Your request has been received. We'll be in touch shortly!</p>
                     </div>
                 `;
             }
