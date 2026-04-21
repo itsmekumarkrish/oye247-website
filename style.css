@@ -1394,6 +1394,115 @@ section {
     transform: translateY(-5px);
 }
 
+
+/* --- PREMIUM CONTACT SECTION POLISH --- */
+
+/* Dynamic Aura Background */
+.contact-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(20, 241, 217, 0.08) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+    animation: auraFloat 15s ease-in-out infinite alternate;
+}
+
+@keyframes auraFloat {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.5; }
+    50% { transform: translate(-45%, -55%) scale(1.2) rotate(180deg); opacity: 0.8; }
+    100% { transform: translate(-55%, -45%) scale(1) rotate(360deg); opacity: 0.5; }
+}
+
+/* Glass Shine Effect for Form Card */
+.contact-form-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-form-card::after {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(135deg, transparent 0%, transparent 45%, rgba(255, 255, 255, 0.05) 50%, transparent 55%, transparent 100%);
+    transform: rotate(45deg);
+    transition: all 0.8s ease;
+    pointer-events: none;
+}
+
+.contact-form-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(20, 241, 217, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(20, 241, 217, 0.1);
+}
+
+.contact-form-card:hover::after {
+    animation: shineSweep 1.5s ease-in-out;
+}
+
+@keyframes shineSweep {
+    0% { transform: translate(-30%, -30%) rotate(45deg); }
+    100% { transform: translate(30%, 30%) rotate(45deg); }
+}
+
+/* Staggered Benefits Animation */
+.benefits-list li {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.benefits-list li:nth-child(1) { animation-delay: 0.1s; }
+.benefits-list li:nth-child(2) { animation-delay: 0.2s; }
+.benefits-list li:nth-child(3) { animation-delay: 0.3s; }
+.benefits-list li:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideInRight {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Input Focus Polish */
+.floating-group input:focus,
+.floating-group select:focus,
+.floating-group textarea:focus,
+.select-trigger:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-teal);
+    box-shadow: 0 0 15px rgba(20, 241, 217, 0.15), inset 0 0 10px rgba(20, 241, 217, 0.05);
+    outline: none;
+}
+
+/* Button Pulse for Valid Form */
+.btn-primary:not(:disabled) {
+    animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+    0% { box-shadow: 0 0 0 0 rgba(20, 241, 217, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(20, 241, 217, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(20, 241, 217, 0); }
+}
+
+/* Custom Select Dropdown Polish */
+.select-dropdown {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform-origin: top;
+    animation: dropdownPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dropdownPop {
+    from { opacity: 0; transform: scaleY(0.95); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
 .footer-socials a.social-tw:hover {
     background: #1DA1F2;
     color: #fff;
