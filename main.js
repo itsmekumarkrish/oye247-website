@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             if(targetElement) {
                 e.preventDefault();
-                const headerOffset = 80; // approximate navbar height
+                const headerOffset = 100; // approximate navbar height + breathing room
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
   

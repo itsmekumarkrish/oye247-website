@@ -831,6 +831,7 @@ section {
     padding: 120px 0;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 80px;
 }
 
 .contact-bg-glow {
