@@ -785,19 +785,34 @@
                             <span class="field-validation"><i class="ph ph-check"></i></span>
                         </div>
                         <div class="form-row">
-                            <div class="floating-group">
-                                <select id="contact-business" name="business" required>
-                                    <option value="" disabled selected></option>
-                                    <option value="Real Estate">Real Estate</option>
-                                    <option value="E-commerce">E-commerce</option>
-                                    <option value="Coaching">Coaching</option>
-                                    <option value="Healthcare">Healthcare</option>
-                                    <option value="Agency">Agency</option>
-                                    <option value="Local Business">Local Business</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <label for="contact-business">Business Type</label>
-                            </div>
+                                <div class="custom-select-wrapper" id="business-select-wrapper">
+                                    <input type="hidden" name="business" id="selected-business-type" required>
+                                    <div class="select-trigger">
+                                        <span class="trigger-text">Select Business Type</span>
+                                        <i class="ph ph-caret-down"></i>
+                                    </div>
+                                    <div class="select-dropdown">
+                                        <div class="select-search-container">
+                                            <i class="ph ph-magnifying-glass"></i>
+                                            <input type="text" class="select-search-input" placeholder="Search business type...">
+                                        </div>
+                                        <ul class="select-options-list">
+                                            <li class="select-option" data-value="Real Estate">Real Estate</li>
+                                            <li class="select-option" data-value="E-commerce">E-commerce</li>
+                                            <li class="select-option" data-value="SaaS / Software">SaaS / Software</li>
+                                            <li class="select-option" data-value="Marketing Agency">Marketing Agency</li>
+                                            <li class="select-option" data-value="Healthcare / Clinic">Healthcare / Clinic</li>
+                                            <li class="select-option" data-value="Coaching / Education">Coaching / Education</li>
+                                            <li class="select-option" data-value="Law Firm / Legal">Law Firm / Legal</li>
+                                            <li class="select-option" data-value="Fitness / Gym">Fitness / Gym</li>
+                                            <li class="select-option" data-value="Restaurant / Food">Restaurant / Food</li>
+                                            <li class="select-option" data-value="Local Business">Local Business</li>
+                                            <li class="select-option" data-value="Other">Other</li>
+                                        </ul>
+                                        <div class="no-results">No matches found.</div>
+                                    </div>
+                                </div>
+                                <label style="display:none;">Business Type</label>
                             <div class="floating-group">
                                 <select id="contact-leads" name="leads">
                                     <option value="" disabled selected></option>

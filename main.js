@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModalBtn.addEventListener('click', closeModal);
     }
 
-    // Close on outside click
+    // Close modal on background click
     if(contactModal) {
         contactModal.addEventListener('click', (e) => {
             if(e.target === contactModal) {
@@ -462,6 +462,80 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Custom Select Logic ---
+    const selectWrapper = document.getElementById('business-select-wrapper');
+    const selectTrigger = selectWrapper ? selectWrapper.querySelector('.select-trigger') : null;
+    const searchInput = selectWrapper ? selectWrapper.querySelector('.select-search-input') : null;
+    const optionsList = selectWrapper ? selectWrapper.querySelectorAll('.select-option') : [];
+    const hiddenInput = document.getElementById('selected-business-type');
+    const noResults = selectWrapper ? selectWrapper.querySelector('.no-results') : null;
+
+    if (selectTrigger) {
+        selectTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectWrapper.classList.toggle('active');
+            if (selectWrapper.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const filter = e.target.value.toLowerCase();
+            let hasResults = false;
+
+            optionsList.forEach(option => {
+                const text = option.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    option.classList.remove('hidden');
+                    hasResults = true;
+                } else {
+                    option.classList.add('hidden');
+                }
+            });
+
+            if (noResults) {
+                noResults.style.display = hasResults ? 'none' : 'block';
+            }
+        });
+
+        // Prevent dropdown close when clicking search input
+        searchInput.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    optionsList.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const value = option.getAttribute('data-value');
+            const text = option.textContent;
+
+            // Update UI
+            if (selectTrigger) {
+                selectTrigger.querySelector('.trigger-text').textContent = text;
+                selectTrigger.style.borderColor = 'rgba(20, 241, 217, 0.3)';
+            }
+            
+            // Update Hidden Input
+            if (hiddenInput) {
+                hiddenInput.value = value;
+                checkFormValidity();
+            }
+
+            // Close dropdown
+            selectWrapper.classList.remove('active');
+            
+            // Highlight selected
+            optionsList.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+        });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', () => {
+        if (selectWrapper) selectWrapper.classList.remove('active');
+    });
 
     // --- Contact Form Logic ---
     const contactForm = document.getElementById('contact-form');
@@ -494,13 +568,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkFormValidity() {
         const nameValid = nameInput && nameInput.value.trim().length >= 2;
         const phoneValid = phoneInput && phoneInput.value.trim().length >= 6;
+        const businessValid = hiddenInput && hiddenInput.value !== "";
         
         if (nameInput) updateFieldValidation(nameInput, nameValid);
         if (phoneInput) updateFieldValidation(phoneInput, phoneValid);
         if (emailInput) updateFieldValidation(emailInput, emailInput.value.trim() === '' || isValidEmail(emailInput.value.trim()));
 
         if (submitBtn) {
-            submitBtn.disabled = !(nameValid && phoneValid);
+            submitBtn.disabled = !(nameValid && phoneValid && businessValid);
         }
     }
 
