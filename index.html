@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oye247 | Automate Your Business</title>
+    <meta name="description" content="Capture every lead, respond instantly, and close more deals with AI-powered automation.">
+    
+    <!-- Fonts: Inter for body, Outfit for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="ph ph-robot"></i> Oye247
+            </div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#use-cases">Benefits</a>
+                </div>
+                <div class="nav-actions">
+                    <a href="https://wa.me/1234567890?text=Hi,%20I%20want%20to%20automate%20my%20business%20using%20AI.%20Can%20you%20help%20me?" class="nav-wa" target="_blank" rel="noopener noreferrer"><i class="ph ph-whatsapp-logo"></i> <span class="wa-text">WhatsApp</span></a>
+                    <button class="mobile-menu-btn" aria-label="Toggle menu"><i class="ph ph-list"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-content">
+            <button class="mobile-menu-close" aria-label="Close menu"><i class="ph ph-x"></i></button>
+            <div class="mobile-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#use-cases">Benefits</a>
+                <a href="https://wa.me/1234567890?text=Hi,%20I%20want%20to%20automate%20my%20business%20using%20AI.%20Can%20you%20help%20me?" class="nav-wa" target="_blank" rel="noopener noreferrer"><i class="ph ph-whatsapp-logo"></i> WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="badge">Next-Gen AI Automation</div>
+                <h1 class="headline">Automate Your Business.<br><span class="text-gradient">Convert More Customers with AI.</span></h1>
+                <p class="subheadline">Capture every lead, respond instantly, and close more deals with AI-powered automation.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Get Demo <i class="ph ph-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-secondary">Start Automation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted Logos Section -->
+    <section class="trusted-logos">
+        <canvas id="logos-canvas"></canvas>
+        <div class="logos-glow"></div>
+        <div class="container">
+            <h3 class="logos-label">Trusted by modern AI-driven businesses</h3>
+            <div class="marquee-wrapper">
+                <div class="marquee-fade-left"></div>
+                <div class="marquee-fade-right"></div>
+                <div class="marquee-content">
+                    <div class="marquee-track">
+                        <!-- Group 1 -->
+                        <div class="marquee-group">
+                            <div class="logo-item"><i class="ph ph-robot"></i> OpenAI</div>
+                            <div class="logo-item"><i class="ph ph-cpu"></i> Anthropic</div>
+                            <div class="logo-item"><i class="ph ph-brain"></i> DeepMind</div>
+                            <div class="logo-item"><i class="ph ph-code"></i> HuggingFace</div>
+                            <div class="logo-item"><i class="ph ph-meta-logo"></i> Meta AI</div>
+                            <div class="logo-item"><i class="ph ph-google-logo"></i> Google</div>
+                        </div>
+                        <!-- Group 2 (Duplicate for infinite scroll) -->
+                        <div class="marquee-group" aria-hidden="true">
+                            <div class="logo-item"><i class="ph ph-robot"></i> OpenAI</div>
+                            <div class="logo-item"><i class="ph ph-cpu"></i> Anthropic</div>
+                            <div class="logo-item"><i class="ph ph-brain"></i> DeepMind</div>
+                            <div class="logo-item"><i class="ph ph-code"></i> HuggingFace</div>
+                            <div class="logo-item"><i class="ph ph-meta-logo"></i> Meta AI</div>
+                            <div class="logo-item"><i class="ph ph-google-logo"></i> Google</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>The Cost of <span class="text-gradient">Missed Opportunities</span></h2>
+                <p>Are you losing customers because you can't reply fast enough?</p>
+            </div>
+            <div class="grid-3">
+                <div class="card glass">
+                    <div class="card-icon"><i class="ph ph-clock-countdown"></i></div>
+                    <h3>Delayed Responses</h3>
+                    <p>Customers expect instant replies. Delays mean lost sales to competitors.</p>
+                </div>
+                <div class="card glass">
+                    <div class="card-icon"><i class="ph ph-user-minus"></i></div>
+                    <h3>Missed Leads</h3>
+                    <p>Valuable leads slip through the cracks without a system to capture them 24/7.</p>
+                </div>
+                <div class="card glass">
+                    <div class="card-icon"><i class="ph ph-chart-line-down"></i></div>
+                    <h3>Low Conversion</h3>
+                    <p>Lack of consistent follow-up results in lower overall conversion rates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Businesses Use Oye247 Section -->
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <h2>How Businesses Use <span class="text-gradient">Oye247</span></h2>
+                <p>Actionable automation that drives real growth</p>
+            </div>
+            <div class="grid-2x2">
+                <div class="use-case-card glass fade-up">
+                    <div class="card-icon"><i class="ph ph-user-focus"></i></div>
+                    <h3>Lead Generation</h3>
+                    <p>Capture and qualify leads automatically from your website and WhatsApp.</p>
+                </div>
+                <div class="use-case-card glass fade-up">
+                    <div class="card-icon"><i class="ph ph-chat-circle-dots"></i></div>
+                    <h3>Customer Support</h3>
+                    <p>Respond instantly to customer queries 24/7 without manual effort.</p>
+                </div>
+                <div class="use-case-card glass fade-up">
+                    <div class="card-icon"><i class="ph ph-calendar-plus"></i></div>
+                    <h3>Appointment Booking</h3>
+                    <p>Automatically schedule meetings and demos without back-and-forth.</p>
+                </div>
+                <div class="use-case-card glass fade-up">
+                    <div class="card-icon"><i class="ph ph-trend-up"></i></div>
+                    <h3>Sales Follow-ups</h3>
+                    <p>Convert more leads with intelligent automated follow-ups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="solution-grid">
+                <div class="solution-content">
+                    <h2>Meet Your New <span class="text-gradient">AI Sales Assistant</span></h2>
+                    <p>Our intelligent AI agents work around the clock to engage visitors, answer questions, and book meetings directly into your calendar.</p>
+                    <ul class="feature-list">
+                        <li><i class="ph ph-check-circle"></i> Instant replies across all channels</li>
+                        <li><i class="ph ph-check-circle"></i> Intelligent lead qualification</li>
+                        <li><i class="ph ph-check-circle"></i> Seamless CRM integration</li>
+                    </ul>
+                </div>
+                <div class="solution-visual glass">
+                    <div class="mockup-chat">
+                        <div class="msg received">Hi, I'm looking for automation solutions.</div>
+                        <div class="msg sent">Hello! I can definitely help with that. What industry are you in?</div>
+                        <div class="msg received">E-commerce. We get lots of support tickets.</div>
+                        <div class="msg sent">Perfect. Our AI can handle 80% of those tickets instantly. Would you like a demo?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Simple <span class="text-gradient">3-Step</span> Setup</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card glass">
+                    <div class="step-number">1</div>
+                    <h3>Connect</h3>
+                    <p>Link your website, WhatsApp, and CRM in minutes.</p>
+                </div>
+                <div class="card glass">
+                    <div class="step-number">2</div>
+                    <h3>Train</h3>
+                    <p>Our AI learns your business from your existing data.</p>
+                </div>
+                <div class="card glass">
+                    <div class="step-number">3</div>
+                    <h3>Automate</h3>
+                    <p>Sit back as AI handles leads and support 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials fade-up" id="testimonials">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Real Results from <span class="text-gradient">Real Businesses</span></h2>
+                <p>Companies are automating faster, converting more, and scaling smarter with AI.</p>
+            </div>
+        </div>
+        <div class="testi-marquee-wrapper">
+            <div class="testi-fade-left"></div>
+            <div class="testi-fade-right"></div>
+            <div class="testi-track">
+                <!-- Group 1 -->
+                <div class="testi-group">
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Rahul Sharma</h4>
+                                <span>Real Estate</span>
+                            </div>
+                        </div>
+                        <p>"We integrated Oye247 and saw our lead conversions jump by 3x within just three weeks. It’s like having a top-performing SDR working 24/7 without taking breaks."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Priya Mehta</h4>
+                                <span>E-commerce</span>
+                            </div>
+                        </div>
+                        <p>"Handling support tickets used to drain our team's energy. Now, 80% of routine customer queries are resolved instantly, freeing us up to focus on growth."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Arjun Reddy</h4>
+                                <span>Coaching</span>
+                            </div>
+                        </div>
+                        <p>"I never miss a potential client anymore. Everything from initial contact to qualifying questions is automated seamlessly."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Karan Verma</h4>
+                                <span>Digital Agency</span>
+                            </div>
+                        </div>
+                        <p>"Our average response time went from hours down to literal seconds. The boost in client satisfaction and retention has been absolutely incredible."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Sneha Iyer</h4>
+                                <span>Healthcare Clinic</span>
+                            </div>
+                        </div>
+                        <p>"Patient appointments are now booked automatically without endless phone tags. Our front desk is finally completely stress-free."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Amit Patel</h4>
+                                <span>Local Business</span>
+                            </div>
+                        </div>
+                        <p>"We started getting significantly more walk-ins simply because our WhatsApp automation replies instantly to every single inquiry we receive."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Neha Kapoor</h4>
+                                <span>SaaS Startup</span>
+                            </div>
+                        </div>
+                        <p>"Our entire user onboarding process is fully automated now. It guides new signups step-by-step, drastically reducing our initial churn rate."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Rohit Singh</h4>
+                                <span>EdTech</span>
+                            </div>
+                        </div>
+                        <p>"Prospective student inquiries are handled 24/7 without any manual effort. Our enrollment numbers have steadily climbed since launch."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Pooja Nair</h4>
+                                <span>Salon Chain</span>
+                            </div>
+                        </div>
+                        <p>"We virtually eliminated missed calls and doubled our weekend bookings. The AI acts as our dedicated receptionist around the clock."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Vivek Gupta</h4>
+                                <span>Finance</span>
+                            </div>
+                        </div>
+                        <p>"Lead qualification became completely effortless. My sales team only talks to highly qualified prospects who are actually ready to buy."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Ankit Jain</h4>
+                                <span>Marketing Agency</span>
+                            </div>
+                        </div>
+                        <p>"Our team's manual workload was reduced by 60%. We repurposed that saved time into creative strategy, which directly boosted our revenue."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Riya Sharma</h4>
+                                <span>Fitness Coach</span>
+                            </div>
+                        </div>
+                        <p>"New clients are onboarded automatically with zero friction. The experience feels highly personalized, and they love the instant responses."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Suresh Kumar</h4>
+                                <span>Retail</span>
+                            </div>
+                        </div>
+                        <p>"We capture every single lead now, across all channels. Nothing falls through the cracks, and our sales pipeline has never looked healthier."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Deepak Yadav</h4>
+                                <span>Logistics</span>
+                            </div>
+                        </div>
+                        <p>"Logistics operations became so much faster with these automation workflows. We update clients automatically without lifting a finger."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Meena Reddy</h4>
+                                <span>Boutique</span>
+                            </div>
+                        </div>
+                        <p>"Our overall sales improved by 40% without needing to hire additional staff. The AI scales effortlessly as our business volume grows."</p>
+                    </div>
+                </div>
+                <!-- Group 2 (Duplicate for infinite scroll) -->
+                <div class="testi-group" aria-hidden="true">
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Rahul Sharma</h4>
+                                <span>Real Estate</span>
+                            </div>
+                        </div>
+                        <p>"We integrated Oye247 and saw our lead conversions jump by 3x within just three weeks. It’s like having a top-performing SDR working 24/7 without taking breaks."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Priya Mehta</h4>
+                                <span>E-commerce</span>
+                            </div>
+                        </div>
+                        <p>"Handling support tickets used to drain our team's energy. Now, 80% of routine customer queries are resolved instantly, freeing us up to focus on growth."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Arjun Reddy</h4>
+                                <span>Coaching</span>
+                            </div>
+                        </div>
+                        <p>"I never miss a potential client anymore. Everything from initial contact to qualifying questions is automated seamlessly."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Karan Verma</h4>
+                                <span>Digital Agency</span>
+                            </div>
+                        </div>
+                        <p>"Our average response time went from hours down to literal seconds. The boost in client satisfaction and retention has been absolutely incredible."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Sneha Iyer</h4>
+                                <span>Healthcare Clinic</span>
+                            </div>
+                        </div>
+                        <p>"Patient appointments are now booked automatically without endless phone tags. Our front desk is finally completely stress-free."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Amit Patel</h4>
+                                <span>Local Business</span>
+                            </div>
+                        </div>
+                        <p>"We started getting significantly more walk-ins simply because our WhatsApp automation replies instantly to every single inquiry we receive."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Neha Kapoor</h4>
+                                <span>SaaS Startup</span>
+                            </div>
+                        </div>
+                        <p>"Our entire user onboarding process is fully automated now. It guides new signups step-by-step, drastically reducing our initial churn rate."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Rohit Singh</h4>
+                                <span>EdTech</span>
+                            </div>
+                        </div>
+                        <p>"Prospective student inquiries are handled 24/7 without any manual effort. Our enrollment numbers have steadily climbed since launch."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Pooja Nair</h4>
+                                <span>Salon Chain</span>
+                            </div>
+                        </div>
+                        <p>"We virtually eliminated missed calls and doubled our weekend bookings. The AI acts as our dedicated receptionist around the clock."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Vivek Gupta</h4>
+                                <span>Finance</span>
+                            </div>
+                        </div>
+                        <p>"Lead qualification became completely effortless. My sales team only talks to highly qualified prospects who are actually ready to buy."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Ankit Jain</h4>
+                                <span>Marketing Agency</span>
+                            </div>
+                        </div>
+                        <p>"Our team's manual workload was reduced by 60%. We repurposed that saved time into creative strategy, which directly boosted our revenue."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Riya Sharma</h4>
+                                <span>Fitness Coach</span>
+                            </div>
+                        </div>
+                        <p>"New clients are onboarded automatically with zero friction. The experience feels highly personalized, and they love the instant responses."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Suresh Kumar</h4>
+                                <span>Retail</span>
+                            </div>
+                        </div>
+                        <p>"We capture every single lead now, across all channels. Nothing falls through the cracks, and our sales pipeline has never looked healthier."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Deepak Yadav</h4>
+                                <span>Logistics</span>
+                            </div>
+                        </div>
+                        <p>"Logistics operations became so much faster with these automation workflows. We update clients automatically without lifting a finger."</p>
+                    </div>
+                    <div class="testi-card">
+                        <div class="testi-header">
+                            <div class="testi-avatar"><i class="ph ph-user"></i></div>
+                            <div class="testi-info">
+                                <h4>Meena Reddy</h4>
+                                <span>Boutique</span>
+                            </div>
+                        </div>
+                        <p>"Our overall sales improved by 40% without needing to hire additional staff. The AI scales effortlessly as our business volume grows."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq fade-up" id="faq">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Frequently Asked <span class="text-gradient">Questions</span></h2>
+                <p>Everything you need to know before getting started with AI automation.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How does AI automation work for my business?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Our AI agents handle customer inquiries, qualify leads, and automate follow-ups instantly, reducing manual effort and increasing conversions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I need technical knowledge to use this?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>No. Everything is set up for you. You can manage automation easily without any coding or technical skills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can this integrate with WhatsApp and my CRM?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes. We integrate seamlessly with WhatsApp, websites, and popular CRM systems to ensure smooth operations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How quickly can I get started?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>You can get started within 24–48 hours after setup. Our team handles onboarding and configuration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Will this replace my team?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>No. It enhances your team by handling repetitive tasks so your team can focus on closing deals and growth.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is this suitable for small businesses?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Absolutely. Whether you're a startup or growing business, AI automation helps scale operations efficiently.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Will this work for my specific industry?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes. Our AI adapts to your business model and works across industries like real estate, healthcare, e-commerce, agencies, and more. It captures leads, automates responses, and improves conversions based on your workflow.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How secure is my data?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We use industry-standard security protocols to ensure your data remains safe and protected.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What kind of results can I expect?</span>
+                        <i class="ph ph-plus faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Businesses typically see faster response times, higher lead conversions, and improved customer experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-bg-glow"></div>
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <h2 class="contact-heading">Ready to <span class="text-gradient">Automate Your Business?</span></h2>
+                <p class="contact-subheading">Tell us about your business. We'll create a personalized AI automation plan tailored to your needs.</p>
+            </div>
+            <div class="contact-grid">
+                <!-- Left: Value Props -->
+                <div class="contact-value fade-up">
+                    <h3>What You'll Get</h3>
+                    <ul class="value-list">
+                        <li>
+                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
+                            <span>Personalized AI automation plan</span>
+                        </li>
+                        <li>
+                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
+                            <span>Free strategy consultation</span>
+                        </li>
+                        <li>
+                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
+                            <span>WhatsApp + lead automation blueprint</span>
+                        </li>
+                        <li>
+                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
+                            <span>Clear roadmap to increase conversions</span>
+                        </li>
+                        <li>
+                            <span class="value-check"><i class="ph ph-check-circle"></i></span>
+                            <span>No commitment required</span>
+                        </li>
+                    </ul>
+                    <div class="contact-trust">
+                        <div class="trust-item">
+                            <i class="ph ph-clock"></i>
+                            <span>Response within 24 hours</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="ph ph-shield-check"></i>
+                            <span>100% confidential & secure</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="ph ph-star"></i>
+                            <span>Trusted by 500+ businesses</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form Card -->
+                <div class="contact-form-card fade-up">
+                    <div id="contact-form-wrap">
+                        <h3 class="form-title">Get Your Automation Plan</h3>
+                        <p class="form-subtitle">Fill in the details below and our team will reach out shortly.</p>
+                        <form id="contact-form" novalidate>
+                            <div class="floating-group">
+                                <input type="text" id="contact-name" name="name" placeholder=" " required>
+                                <label for="contact-name">Full Name <span class="required">*</span></label>
+                                <span class="field-validation"><i class="ph ph-check"></i></span>
+                            </div>
+                            <div class="floating-group">
+                                <input type="tel" id="contact-phone" name="phone" placeholder=" " required>
+                                <label for="contact-phone">Phone Number <span class="required">*</span></label>
+                                <span class="field-validation"><i class="ph ph-check"></i></span>
+                            </div>
+                            <div class="floating-group">
+                                <input type="email" id="contact-email" name="email" placeholder=" ">
+                                <label for="contact-email">Email Address <span class="optional-tag">(optional)</span></label>
+                                <span class="field-validation"><i class="ph ph-check"></i></span>
+                            </div>
+                            <div class="form-row">
+                                <div class="floating-group">
+                                    <select id="contact-business" name="business" required>
+                                        <option value="" disabled selected></option>
+                                        <option value="Real Estate">Real Estate</option>
+                                        <option value="E-commerce">E-commerce</option>
+                                        <option value="Coaching">Coaching</option>
+                                        <option value="Healthcare">Healthcare</option>
+                                        <option value="Agency">Agency</option>
+                                        <option value="Local Business">Local Business</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label for="contact-business">Business Type</label>
+                                </div>
+                                <div class="floating-group">
+                                    <select id="contact-leads" name="leads">
+                                        <option value="" disabled selected></option>
+                                        <option value="500-1000">500 – 1,000</option>
+                                        <option value="1000-5000">1,000 – 5,000</option>
+                                        <option value="5000-10000">5,000 – 10,000</option>
+                                        <option value="10000+">10,000+</option>
+                                    </select>
+                                    <label for="contact-leads">Monthly Leads</label>
+                                </div>
+                            </div>
+                            <div class="floating-group">
+                                <textarea id="contact-message" name="message" rows="3" placeholder=" "></textarea>
+                                <label for="contact-message">Message <span class="optional-tag">(optional)</span></label>
+                            </div>
+                            <button type="submit" class="btn-gradient" id="form-submit-btn" disabled>
+                                <span id="btn-text">Get Your Automation Plan <i class="ph ph-arrow-right"></i></span>
+                                <span id="btn-loading" style="display:none;"><i class="ph ph-circle-notch ph-spin"></i> Sending...</span>
+                            </button>
+                            <p class="form-micro-trust">
+                                <span><i class="ph ph-lightning"></i> We typically respond within 10 minutes</span>
+                                <span>No spam. 100% secure.</span>
+                            </p>
+                        </form>
+                    </div>
+                    <!-- Success State -->
+                    <div id="contact-success" style="display:none;">
+                        <div class="success-checkmark">
+                            <div class="success-ring"></div>
+                            <i class="ph ph-check"></i>
+                        </div>
+                        <h3>Thank You! 🎉</h3>
+                        <p>Your automation plan request has been received. Our team will contact you shortly to walk you through the next steps.</p>
+                        <a href="https://wa.me/1234567890?text=Hi%2C%20I%20just%20submitted%20my%20automation%20plan%20request.%20Looking%20forward%20to%20connecting!" target="_blank" class="btn-gradient mt-4">
+                            <i class="ph ph-whatsapp-logo"></i> Connect on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- CTA Section -->
+    <section class="cta-section fade-up" id="cta">
+        <div class="container text-center">
+            <h2>Ready to <span class="text-gradient">Scale?</span></h2>
+            <p>Join futuristic businesses automating their growth today.</p>
+            <a href="#contact" class="btn btn-primary mt-4">Get Your Automation Plan</a>
+        </div>
+    </section>
+
+    <!-- Premium Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="ph ph-robot"></i> Oye247
+                    </div>
+                    <p class="footer-desc">Automating the future of business. Capture leads, book meetings, and scale effortlessly with intelligent AI agents.</p>
+                    <div class="footer-socials">
+                        <a href="#"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+                        <a href="#"><i class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#use-cases">Features</a></li>
+                        <li><a href="#use-cases">Use Cases</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Support & Legal</h4>
+                    <ul>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service">Terms of Service</a></li>
+                        <li><a href="/refund-policy">Refund Policy</a></li>
+                        <li><a href="/disclaimer">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Oye247. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="/privacy-policy">Privacy</a>
+                    <span class="dot">•</span>
+                    <a href="/terms-of-service">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbot-widget">
+        <div class="chatbot-window glass" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="ph ph-robot"></i> Oye247 Assistant
+                </div>
+                <button class="close-chat" id="close-chat"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="chatbot-body" id="chatbot-body">
+                <div class="chat-message bot-message">
+                    Looking to automate your business with AI? I can guide you.
+                </div>
+            </div>
+            <div class="chatbot-options" id="chatbot-options">
+                <button class="chat-option-btn" data-reply="Yes, tell me more">Yes, tell me more</button>
+                <button class="chat-option-btn" data-reply="Just browsing">Just browsing</button>
+            </div>
+            <div class="chatbot-input-area" style="display: none;" id="wa-cta-area">
+                <a href="https://wa.me/1234567890?text=Hi,%20I%20want%20to%20automate%20my%20business%20using%20AI.%20Can%20you%20help%20me?" target="_blank" class="btn btn-primary btn-full">Continue on WhatsApp</a>
+            </div>
+        </div>
+        <button class="chatbot-trigger" id="chatbot-trigger">
+            <i class="ph ph-chat-teardrop-text"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>

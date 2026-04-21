@@ -1,0 +1,14 @@
+node_modules/
+.env
+*.log
+.DS_Store
+*.tar.gz
+responsive.py
+hero_redesign.py
+fix_layout.py
+revert_hero.py
+fix_links.py
+fix_js.py
+ui_refine.py
+convert_steps.py
+gen_legal.py
