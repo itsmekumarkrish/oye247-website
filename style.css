@@ -2515,9 +2515,9 @@ body.modal-open {
 }
 
 .btn-wa:hover {
-    background: #128C7E !important;
+    background: #34e77b !important;
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
 }
 
 .btn-wa i {
