@@ -463,103 +463,114 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Custom Select Logic ---
-    const selectWrapper = document.getElementById('business-select-wrapper');
-    const selectTrigger = selectWrapper ? selectWrapper.querySelector('.select-trigger') : null;
-    const searchInput = selectWrapper ? selectWrapper.querySelector('.select-search-input') : null;
-    const optionsList = selectWrapper ? selectWrapper.querySelectorAll('.select-option') : [];
-    const hiddenInput = document.getElementById('selected-business-type');
-    const noResults = selectWrapper ? selectWrapper.querySelector('.no-results') : null;
+    // --- AI Smart Input Logic ---
+    const businessRawInput = document.getElementById('business-raw-input');
+    const aiDetectedCategory = document.getElementById('ai-detected-category');
+    const aiSuggestionsBox = document.getElementById('ai-suggestions');
+    const aiList = document.getElementById('ai-list');
+    const quickChips = document.getElementById('quick-chips');
 
-    if (selectTrigger) {
-        selectTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            selectWrapper.classList.toggle('active');
-            if (selectWrapper.classList.contains('active')) {
-                searchInput.focus();
-            }
-        });
-    }
+    const businessDictionary = {
+        'Real Estate': ['home', 'house', 'property', 'realtor', 'agent', 'broker', 'land', 'apartment'],
+        'E-commerce': ['store', 'shop', 'online', 'sell', 'product', 'clothes', 'ecommerce', 'dropshipping'],
+        'SaaS / Software': ['app', 'software', 'platform', 'tech', 'saas', 'startup', 'web', 'dev'],
+        'Marketing Agency': ['ads', 'marketing', 'social', 'branding', 'agency', 'seo', 'leads'],
+        'Healthcare': ['doctor', 'clinic', 'medical', 'health', 'dental', 'patient', 'hospital'],
+        'Law Firm': ['law', 'legal', 'attorney', 'lawyer', 'firm', 'court'],
+        'Restaurant': ['food', 'cafe', 'restaurant', 'coffee', 'bakery', 'kitchen', 'delivery'],
+        'Fitness / Gym': ['gym', 'fitness', 'workout', 'trainer', 'coach', 'yoga', 'studio'],
+        'Education / Coaching': ['school', 'coach', 'teaching', 'online course', 'training', 'institute', 'tutor'],
+        'Logistics / Transport': ['delivery', 'transport', 'shipping', 'truck', 'warehouse', 'logistics']
+    };
 
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const filter = e.target.value.toLowerCase();
-            let hasResults = false;
+    function getAiSuggestions(query) {
+        if (!query || query.length < 2) return [];
+        const normalized = query.toLowerCase();
+        const matches = [];
 
-            optionsList.forEach(option => {
-                const text = option.textContent.toLowerCase();
-                if (text.includes(filter)) {
-                    option.classList.remove('hidden');
-                    hasResults = true;
-                } else {
-                    option.classList.add('hidden');
-                }
+        for (const [category, keywords] of Object.entries(businessDictionary)) {
+            let score = 0;
+            if (category.toLowerCase().includes(normalized)) score += 10;
+            keywords.forEach(kw => {
+                if (normalized.includes(kw)) score += 5;
+                if (kw.includes(normalized)) score += 2;
             });
 
-            if (noResults) {
-                noResults.style.display = hasResults ? 'none' : 'block';
+            if (score > 0) {
+                matches.push({ category, score });
             }
-        });
+        }
 
-        // Prevent dropdown close when clicking search input
-        searchInput.addEventListener('click', (e) => e.stopPropagation());
+        return matches.sort((a, b) => b.score - a.score).slice(0, 5);
     }
 
-    const otherBusinessWrap = document.getElementById('other-business-wrap');
-    const otherBusinessInput = document.getElementById('other-business-input');
-
-    optionsList.forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const value = option.getAttribute('data-value');
-            const text = option.textContent;
-
-            // Update UI
-            if (selectTrigger) {
-                selectTrigger.querySelector('.trigger-text').textContent = text;
-                selectTrigger.style.borderColor = 'rgba(20, 241, 217, 0.3)';
-            }
+    if (businessRawInput) {
+        businessRawInput.addEventListener('input', (e) => {
+            const query = e.target.value;
             
-            const group = selectWrapper.closest('.floating-group');
-            // Handle "Other" selection
-            if (value === 'Other') {
-                if (otherBusinessWrap) otherBusinessWrap.classList.add('active');
-                if (otherBusinessInput) {
-                    otherBusinessInput.focus();
-                    if (hiddenInput) hiddenInput.value = otherBusinessInput.value;
-                }
-                if (group) group.classList.add('valid');
+            // Hide quick chips when typing starts
+            if (query.length > 0) {
+                quickChips.classList.add('hidden');
             } else {
-                if (otherBusinessWrap) otherBusinessWrap.classList.remove('active');
-                if (hiddenInput) hiddenInput.value = value;
-                if (group) group.classList.add('valid');
+                quickChips.classList.remove('hidden');
             }
 
-            checkFormValidity();
-
-            // Close dropdown
-            selectWrapper.classList.remove('active');
+            const suggestions = getAiSuggestions(query);
             
-            // Highlight selected
-            optionsList.forEach(opt => opt.classList.remove('selected'));
-            option.classList.add('selected');
-        });
-    });
+            if (suggestions.length > 0) {
+                aiList.innerHTML = suggestions.map(s => `
+                    <li class="suggestion-item" data-category="${s.category}">
+                        <span>${s.category.replace(new RegExp(query, 'gi'), match => `<strong>${match}</strong>`)}</span>
+                        <span class="match-percent">${Math.min(99, 70 + s.score)}% match</span>
+                    </li>
+                `).join('');
+                aiSuggestionsBox.classList.add('active');
+            } else {
+                aiSuggestionsBox.classList.remove('active');
+            }
 
-    // Sync "Other" input to hidden field
-    if (otherBusinessInput) {
-        otherBusinessInput.addEventListener('input', () => {
-            if (hiddenInput) {
-                hiddenInput.value = otherBusinessInput.value;
+            // Update hidden input with top suggestion if any, or raw input
+            aiDetectedCategory.value = suggestions.length > 0 ? suggestions[0].category : 'Other / Manual';
+            checkFormValidity();
+        });
+
+        // Click a suggestion
+        aiList.addEventListener('click', (e) => {
+            const item = e.target.closest('.suggestion-item');
+            if (item) {
+                const category = item.getAttribute('data-category');
+                businessRawInput.value = category;
+                aiDetectedCategory.value = category;
+                aiSuggestionsBox.classList.remove('active');
+                const group = businessRawInput.closest('.floating-group');
+                if (group) group.classList.add('valid');
+                checkFormValidity();
+            }
+        });
+
+        // Click outside to close
+        document.addEventListener('click', (e) => {
+            if (!businessRawInput.contains(e.target) && !aiSuggestionsBox.contains(e.target)) {
+                aiSuggestionsBox.classList.remove('active');
+            }
+        });
+    }
+
+    // Quick Chips click
+    if (quickChips) {
+        quickChips.addEventListener('click', (e) => {
+            const chip = e.target.closest('.chip');
+            if (chip) {
+                const value = chip.textContent;
+                businessRawInput.value = value;
+                aiDetectedCategory.value = value;
+                quickChips.classList.add('hidden');
+                const group = businessRawInput.closest('.floating-group');
+                if (group) group.classList.add('valid');
                 checkFormValidity();
             }
         });
     }
-
-    // Close on outside click
-    document.addEventListener('click', () => {
-        if (selectWrapper) selectWrapper.classList.remove('active');
-    });
 
     // --- Contact Form Logic ---
     const contactForm = document.getElementById('contact-form');
@@ -592,11 +603,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkFormValidity() {
         const nameValid = nameInput && nameInput.value.trim().length >= 2;
         const phoneValid = phoneInput && phoneInput.value.trim().length >= 6;
-        const businessValid = hiddenInput && hiddenInput.value !== "";
+        const businessValid = aiDetectedCategory && aiDetectedCategory.value !== "";
         
         if (nameInput) updateFieldValidation(nameInput, nameValid);
         if (phoneInput) updateFieldValidation(phoneInput, phoneValid);
         if (emailInput) updateFieldValidation(emailInput, emailInput.value.trim() === '' || isValidEmail(emailInput.value.trim()));
+        
+        // Custom validation for AI field
+        if (businessRawInput) {
+            const group = businessRawInput.closest('.floating-group');
+            if (group) {
+                if (businessValid && businessRawInput.value.trim().length > 0) {
+                    group.classList.add('valid');
+                } else {
+                    group.classList.remove('valid');
+                }
+            }
+        }
 
         if (submitBtn) {
             submitBtn.disabled = !(nameValid && phoneValid && businessValid);
