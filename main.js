@@ -505,6 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('click', (e) => e.stopPropagation());
     }
 
+    const otherBusinessWrap = document.getElementById('other-business-wrap');
+    const otherBusinessInput = document.getElementById('other-business-input');
+
     optionsList.forEach(option => {
         option.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -517,11 +520,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectTrigger.style.borderColor = 'rgba(20, 241, 217, 0.3)';
             }
             
-            // Update Hidden Input
-            if (hiddenInput) {
-                hiddenInput.value = value;
-                checkFormValidity();
+            // Handle "Other" selection
+            if (value === 'Other') {
+                if (otherBusinessWrap) otherBusinessWrap.classList.add('active');
+                if (otherBusinessInput) {
+                    otherBusinessInput.focus();
+                    if (hiddenInput) hiddenInput.value = otherBusinessInput.value;
+                }
+            } else {
+                if (otherBusinessWrap) otherBusinessWrap.classList.remove('active');
+                if (hiddenInput) hiddenInput.value = value;
             }
+
+            checkFormValidity();
 
             // Close dropdown
             selectWrapper.classList.remove('active');
@@ -531,6 +542,16 @@ document.addEventListener('DOMContentLoaded', () => {
             option.classList.add('selected');
         });
     });
+
+    // Sync "Other" input to hidden field
+    if (otherBusinessInput) {
+        otherBusinessInput.addEventListener('input', () => {
+            if (hiddenInput) {
+                hiddenInput.value = otherBusinessInput.value;
+                checkFormValidity();
+            }
+        });
+    }
 
     // Close on outside click
     document.addEventListener('click', () => {

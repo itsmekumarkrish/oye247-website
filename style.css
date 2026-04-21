@@ -2308,3 +2308,36 @@ body.modal-open {
     font-size: 0.9rem;
     display: none;
 }
+
+/* --- Other Business Input Styles --- */
+.other-business-container {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 0;
+}
+
+.other-business-container.active {
+    max-height: 100px;
+    opacity: 1;
+    margin-top: 1.5rem;
+}
+
+.other-business-input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.other-business-input:focus {
+    outline: none;
+    border-color: var(--accent-teal);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(20, 241, 217, 0.1);
+}
