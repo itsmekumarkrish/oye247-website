@@ -1762,8 +1762,8 @@ section {
 .chatbot-trigger {
     width: 60px;
     height: 60px;
-    background: var(--accent-teal);
-    color: var(--bg-dark);
+    background: #25D366;
+    color: #fff;
     border-radius: 50%;
     border: none;
     display: flex;
@@ -1771,12 +1771,14 @@ section {
     justify-content: center;
     font-size: 2rem;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(20, 241, 217, 0.3);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .chatbot-trigger:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-5px);
+    background: #128C7E;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
 }
 
 .chatbot-window {
@@ -2573,7 +2575,7 @@ body.modal-open {
 }
 
 .btn-wa:hover {
-    background: #34e77b !important;
+    background: #128C7E !important;
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
 }
