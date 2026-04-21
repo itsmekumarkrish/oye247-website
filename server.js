@@ -14,6 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
+// Health check for Railway
+app.get('/health', (req, res) => res.status(200).send('OK'));
+
+
 // 3. Ensure MongoDB connection uses process.env.MONGO_URI and handles errors gracefully
 if (process.env.MONGO_URI) {
     try {
