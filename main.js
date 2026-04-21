@@ -411,8 +411,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModalBtns = document.querySelectorAll('.open-contact-modal');
     const closeModalBtn = contactModal ? contactModal.querySelector('.modal-close') : null;
 
-    function openModal() {
+    function openModal(mode = 'automation') {
         if(contactModal) {
+            const titleEl = contactModal.querySelector('.form-title');
+            const subtitleEl = contactModal.querySelector('.form-subtitle');
+            const modeInput = document.getElementById('form-mode-input');
+            const submitBtnText = document.getElementById('btn-text');
+
+            if (mode === 'demo') {
+                if (titleEl) titleEl.textContent = 'Get a Live AI Demo';
+                if (subtitleEl) subtitleEl.textContent = 'See how our AI agents can transform your business in real-time.';
+                if (submitBtnText) submitBtnText.innerHTML = 'Get My Live Demo <i class="ph ph-arrow-right"></i>';
+                if (modeInput) modeInput.value = 'demo';
+            } else {
+                if (titleEl) titleEl.textContent = 'Get Your Automation Plan';
+                if (subtitleEl) subtitleEl.textContent = 'Fill in the details below to receive your custom automation roadmap.';
+                if (submitBtnText) submitBtnText.innerHTML = 'Get Your Automation Plan <i class="ph ph-arrow-right"></i>';
+                if (modeInput) modeInput.value = 'automation';
+            }
+
             contactModal.classList.add('active');
             document.body.classList.add('modal-open');
         }
@@ -428,7 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
     openModalBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            openModal();
+            const mode = btn.getAttribute('data-mode') || 'automation';
+            openModal(mode);
         });
     });
 

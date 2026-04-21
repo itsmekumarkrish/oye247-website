@@ -59,8 +59,8 @@
                 <h1 class="headline">Automate Your Business.<br><span class="text-gradient">Convert More Customers with AI.</span></h1>
                 <p class="subheadline">Capture every lead, respond instantly, and close more deals with AI-powered automation.</p>
                 <div class="hero-cta">
-                    <button class="btn btn-primary open-contact-modal">Get Demo <i class="ph ph-arrow-right"></i></button>
-                    <button class="btn btn-secondary open-contact-modal">Start Automation</button>
+                    <button class="btn btn-primary open-contact-modal" data-mode="demo">Get Demo <i class="ph ph-arrow-right"></i></button>
+                    <button class="btn btn-secondary open-contact-modal" data-mode="automation">Start Automation</button>
                 </div>
             </div>
         </div>
@@ -659,7 +659,7 @@
                         <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-check-circle value-check"></i> Live Bot Demonstration</li>
                         <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-check-circle value-check"></i> ROI Projection</li>
                     </ul>
-                    <button class="btn btn-primary open-contact-modal" style="font-size: 1.25rem; padding: 1.2rem 3rem;">Get Your Automation Plan <i class="ph ph-arrow-right"></i></button>
+                    <button class="btn btn-primary open-contact-modal" data-mode="automation" style="font-size: 1.25rem; padding: 1.2rem 3rem;">Get Your Automation Plan <i class="ph ph-arrow-right"></i></button>
                     <div class="contact-trust" style="margin-top: 3.5rem; display: flex; justify-content: center; flex-direction: row; gap: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 2.5rem; width: 100%;">
                         <div class="trust-item" style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-shield-check"></i> <span>100% Secure & Private</span></div>
                         <div class="trust-item" style="display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-star"></i> <span>Trusted by 500+ businesses</span></div>
@@ -674,7 +674,7 @@
         <div class="container text-center">
             <h2>Ready to <span class="text-gradient">Scale?</span></h2>
             <p>Join futuristic businesses automating their growth today.</p>
-            <button class="btn btn-primary mt-4 open-contact-modal">Get Your Automation Plan</button>
+            <button class="btn btn-primary mt-4 open-contact-modal" data-mode="automation">Get Your Automation Plan</button>
         </div>
     </section>
 
@@ -768,6 +768,7 @@
                     <h3 class="form-title">Get Your Automation Plan</h3>
                     <p class="form-subtitle">Fill in the details below and our team will reach out shortly.</p>
                     <form id="contact-form" novalidate>
+                        <input type="hidden" name="form_mode" id="form-mode-input" value="automation">
                         <div class="floating-group">
                             <input type="text" id="contact-name" name="name" placeholder=" " required>
                             <label for="contact-name">Full Name <span class="required">*</span></label>
