@@ -4,124 +4,488 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | OyeHQ</title>
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Google Fonts -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        :root {
+            --bg-deep: #0B0F14;
+            --bg-card: rgba(17, 21, 28, 0.6);
+            --accent-teal: #14F1D9;
+            --accent-violet: #8B5CF6;
+            --text-main: #FFFFFF;
+            --text-muted: #A1A1AA;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-glow: rgba(20, 241, 217, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Gradient Glows */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(20, 241, 217, 0.08) 0%, transparent 70%);
+            filter: blur(80px);
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: 10%;
+            right: -5%;
+            width: 35%;
+            height: 35%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+            filter: blur(80px);
+        }
+
+        /* Header / Navbar */
+        .navbar {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -0.04em;
+        }
+
+        .logo-oye { color: var(--accent-teal); }
+        .logo-hq { color: #fff; }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .trust-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(20, 241, 217, 0.1);
+            border: 1px solid rgba(20, 241, 217, 0.2);
+            border-radius: 100px;
+            color: var(--accent-teal);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Content Sections */
+        .content-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            animation: slideUp 0.8s ease-out backwards;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(20, 241, 217, 0.2);
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, rgba(20, 241, 217, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        h2 i {
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-teal);
+        }
+
+        /* Rights Highlight Section */
+        .rights-highlight {
+            position: relative;
+            border: 1px solid rgba(20, 241, 217, 0.3);
+            background: radial-gradient(circle at top left, rgba(20, 241, 217, 0.1), transparent);
+            overflow: hidden;
+        }
+
+        .rights-highlight::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(20, 241, 217, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .right-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .right-item i {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .right-item h4 {
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .contact-card {
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .email-link {
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .glass-card { padding: 2rem; }
+            .contact-section { grid-template-columns: 1fr; }
+            .hero { padding: 4rem 0 2rem; }
+        }
+    </style>
 </head>
-<body class="dark-theme">
-    <nav class="minimal-nav">
-        <a href="/" class="logo">
-            <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
-        </a>
-        <a href="/" class="back-link">
-            <i class="ph ph-arrow-left"></i> Back to Home
-        </a>
-    </nav>
+<body>
 
-    <main class="legal-page">
-        <div class="container">
-            <div class="legal-header">
-                <h1>Privacy Policy</h1>
-                <p>Last updated: 2026</p>
-            </div>
-            <div class="legal-content">
-                <p>OyeHQ ("we", "our", "us") respects your privacy and is committed to protecting your personal data.</p>
-                <hr>
-                <h3>1. Information We Collect</h3>
-                <ul>
-                    <li>Name</li>
-                    <li>Email address</li>
-                    <li>Phone number</li>
-                    <li>Business details</li>
-                    <li>Usage data (IP, browser, pages visited)</li>
-                </ul>
-                <hr>
-                <h3>2. How We Use Your Data</h3>
-                <ul>
-                    <li>Provide AI automation services</li>
-                    <li>Respond to inquiries</li>
-                    <li>Improve platform performance</li>
-                    <li>Send relevant communication</li>
-                </ul>
-                <hr>
-                <h3>3. Data Sharing</h3>
-                <p>We do not sell your data.<br>We may share data only with trusted providers (hosting, analytics, communication tools).</p>
-                <hr>
-                <h3>4. Data Security</h3>
-                <p>We use industry-standard security practices to protect your information.</p>
-                <hr>
-                <h3>5. Cookies</h3>
-                <p>We use cookies to enhance user experience and performance tracking.</p>
-                <hr>
-                <h3>6. Data Retention</h3>
-                <p>We retain data only as long as necessary for service or legal compliance.</p>
-                <hr>
-                <h3>7. Your Rights</h3>
-                <p>You can request access, correction, or deletion of your data.<br>Contact: support@oyehq.com</p>
-                <hr>
-                <h3>8. Third-Party Services</h3>
-                <p>We may integrate with external platforms (WhatsApp, CRM tools). Their policies apply separately.</p>
-                <hr>
-                <h3>9. Updates</h3>
-                <p>We may update this policy at any time.</p>
-                <hr>
-                <h3>10. Contact</h3>
-                <p>support@oyehq.com</p>
-            </div>
-        </div>
-    </main>
+    <div class="glow-bg">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+    </div>
 
-    <!-- Premium Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
-                    </div>
-                    <p class="footer-desc">Automating the future of business. Capture leads, book meetings, and scale effortlessly with intelligent AI agents.</p>
-                    <div class="footer-socials">
-                        <a href="#"><i class="ph ph-facebook-logo"></i></a>
-                        <a href="#"><i class="ph ph-twitter-logo"></i></a>
-                        <a href="#"><i class="ph ph-linkedin-logo"></i></a>
-                        <a href="#"><i class="ph ph-instagram-logo"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="/#features">Features</a></li>
-                        <li><a href="/#use-cases">Use Cases</a></li>
-                        <li><a href="/#testimonials">Testimonials</a></li>
-                    </ul>
-                </div>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
+            </a>
+            <a href="/" class="back-link">
+                <i class="ph ph-arrow-left"></i> Back to Home
+            </a>
+        </nav>
 
-                <div class="footer-links">
-                    <h4>Support & Legal</h4>
-                    <ul>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/terms-of-service">Terms of Service</a></li>
-                        <li><a href="/refund-policy">Refund Policy</a></li>
-                        <li><a href="/disclaimer">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
+        <!-- Hero Section -->
+        <header class="hero">
+            <span class="trust-badge">Security First Architecture</span>
+            <h1>Privacy Policy</h1>
+            <p>Last Updated: October 2026</p>
+            <p style="margin-top: 1rem; font-weight: 500; color: var(--accent-teal);">Your data. Your control. Our responsibility.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-grid">
             
-            <div class="footer-bottom">
-                <p>&copy; 2026 OyeHQ. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="/privacy-policy">Privacy</a>
-                    <span class="dot">•</span>
-                    <a href="/terms-of-service">Terms</a>
+            <section class="glass-card intro-card">
+                <p style="font-size: 1.2rem; color: #fff; margin-bottom: 0;">
+                    At OyeHQ, we believe privacy is a fundamental human right. Our platform is built from the ground up with data protection at its core, ensuring your business intelligence remains exactly where it belongs: with you.
+                </p>
+            </section>
+
+            <section class="glass-card" style="animation-delay: 0.1s;">
+                <h2><i class="ph ph-fingerprint"></i> Information We Collect</h2>
+                <p>To provide a seamless AI automation experience, we collect specific data points that allow our agents to function effectively:</p>
+                <ul>
+                    <li><strong>Account Identity:</strong> Full name, professional email, and verified phone number.</li>
+                    <li><strong>Business Intelligence:</strong> Company details, workflow requirements, and specific automation parameters.</li>
+                    <li><strong>Technical Telemetry:</strong> IP addresses, browser configurations, and platform interaction metrics for performance optimization.</li>
+                    <li><strong>Communication Data:</strong> Content of lead inquiries and automated responses processed through our platform.</li>
+                </ul>
+            </section>
+
+            <section class="glass-card" style="animation-delay: 0.2s;">
+                <h2><i class="ph ph-scales"></i> Legal Basis for Processing</h2>
+                <p>We process your information under the following legal frameworks, including compliance with the General Data Protection Regulation (GDPR):</p>
+                <ul>
+                    <li><strong>Contractual Necessity:</strong> To fulfill our service agreement with you.</li>
+                    <li><strong>Consent:</strong> Where you have explicitly granted permission for specific data uses.</li>
+                    <li><strong>Legitimate Interests:</strong> To improve our AI models and protect the security of our platform.</li>
+                    <li><strong>Legal Obligation:</strong> To comply with global regulatory requirements.</li>
+                </ul>
+            </section>
+
+            <section class="glass-card" style="animation-delay: 0.3s;">
+                <h2><i class="ph ph-shield-check"></i> Security Measures</h2>
+                <p>OyeHQ utilizes military-grade security protocols to safeguard your data:</p>
+                <ul>
+                    <li><strong>End-to-End Encryption:</strong> All data in transit is protected via TLS 1.3, and data at rest uses AES-256 encryption.</li>
+                    <li><strong>Isolated Workspaces:</strong> Your automation data is logically isolated from other users to prevent cross-contamination.</li>
+                    <li><strong>Continuous Monitoring:</strong> Real-time threat detection and automated security audits.</li>
+                </ul>
+            </section>
+
+            <!-- Your Rights Highlight -->
+            <section class="glass-card rights-highlight" style="animation-delay: 0.4s;">
+                <h2><i class="ph ph-user-focus"></i> Your Data Rights</h2>
+                <p>As an OyeHQ user, you maintain absolute control over your information. You have the right to exercise the following at any time:</p>
+                
+                <div class="rights-grid">
+                    <div class="right-item">
+                        <i class="ph ph-eye"></i>
+                        <h4>Access</h4>
+                        <p style="font-size: 0.85rem;">Request a full copy of all data we hold about you.</p>
+                    </div>
+                    <div class="right-item">
+                        <i class="ph ph-pencil-line"></i>
+                        <h4>Rectify</h4>
+                        <p style="font-size: 0.85rem;">Correct any inaccurate or incomplete information.</p>
+                    </div>
+                    <div class="right-item">
+                        <i class="ph ph-trash"></i>
+                        <h4>Erase</h4>
+                        <p style="font-size: 0.85rem;">Request the permanent deletion of your data.</p>
+                    </div>
+                    <div class="right-item">
+                        <i class="ph ph-export"></i>
+                        <h4>Portability</h4>
+                        <p style="font-size: 0.85rem;">Export your data in a structured, machine-readable format.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card" style="animation-delay: 0.5s;">
+                <h2><i class="ph ph-cookie"></i> Cookies & Tracking</h2>
+                <p>We use essential and analytical cookies to improve platform stability and user experience. You can manage your preferences through your browser settings, though some automation features may be limited without essential cookies enabled.</p>
+            </section>
+
+            <section class="glass-card" style="animation-delay: 0.6s;">
+                <h2><i class="ph ph-share-network"></i> Third-Party Sub-processors</h2>
+                <p>We partner with a limited number of industry-leading service providers to power OyeHQ. These include:</p>
+                <ul>
+                    <li><strong>Infrastructure:</strong> AWS / Google Cloud (Secured data centers).</li>
+                    <li><strong>Communication:</strong> Twilio / Meta (For WhatsApp & SMS automation).</li>
+                    <li><strong>Analytics:</strong> PostHog (For privacy-first product insights).</li>
+                </ul>
+            </section>
+
+            <section class="glass-card" style="animation-delay: 0.7s;">
+                <h2><i class="ph ph-clock-counter-clockwise"></i> Retention & Deletion</h2>
+                <p>We retain your data only for the duration of your active subscription plus a 30-day grace period. Upon account termination, your data is cryptographically erased from our primary servers and backups within 60 days.</p>
+            </section>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <div class="glass-card contact-card">
+                    <i class="ph ph-envelope-simple"></i>
+                    <h3>General Support</h3>
+                    <p>For any privacy-related inquiries or data requests.</p>
+                    <a href="mailto:support@oyehq.com" class="email-link">support@oyehq.com</a>
+                </div>
+                <div class="glass-card contact-card">
+                    <i class="ph ph-gavel"></i>
+                    <h3>Data Protection Officer</h3>
+                    <p>For formal regulatory or compliance matters.</p>
+                    <a href="mailto:grievance@oyehq.com" class="email-link">grievance@oyehq.com</a>
                 </div>
             </div>
-        </div>
-    </footer>
 
+        </main>
 
-    <script src="main.js"></script>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="logo">
+                <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
+            </div>
+            <div class="footer-links">
+                <a href="/terms-of-service">Terms of Service</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/refund-policy">Refund Policy</a>
+                <a href="/disclaimer">Disclaimer</a>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+                &copy; 2026 OyeHQ Inc. All rights reserved. Built for the future of business.
+            </p>
+        </footer>
+    </div>
+
 </body>
 </html>
