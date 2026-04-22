@@ -1,7 +1,7 @@
 {
-  "name": "oye247-landing",
+  "name": "oyehq-landing",
   "version": "1.0.0",
-  "description": "Backend for Oye247 landing page contact form",
+  "description": "Backend for OyeHQ landing page contact form",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

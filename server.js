@@ -98,7 +98,7 @@ app.post('/api/contact', async (req, res, next) => {
             try {
                 // 1. Admin Notification Email
                 await transporter.sendMail({
-                    from: `"Oye247 Leads" <${process.env.SMTP_USER}>`,
+                    from: `"OyeHQ Leads" <${process.env.SMTP_USER}>`,
                     to: process.env.ADMIN_EMAIL || process.env.SMTP_USER,
                     subject: 'New Automation Lead Received',
                     html: `
@@ -139,7 +139,7 @@ app.post('/api/contact', async (req, res, next) => {
                 // 2. User Confirmation Email (only if email provided)
                 if (email) {
                     await transporter.sendMail({
-                        from: `"Oye247" <${process.env.SMTP_USER}>`,
+                        from: `"OyeHQ" <${process.env.SMTP_USER}>`,
                         to: email,
                         subject: 'Your Automation Plan Request Received',
                         html: `
@@ -158,7 +158,7 @@ app.post('/api/contact', async (req, res, next) => {
                                     <p style="color: #A1A1AA; line-height: 1.8; font-size: 15px;">
                                         We look forward to helping you automate and grow your business.
                                     </p>
-                                    <p style="color: #14F1D9; font-weight: 600; font-size: 15px;">– Team Oye247</p>
+                                    <p style="color: #14F1D9; font-weight: 600; font-size: 15px;">– Team OyeHQ</p>
                                 </div>
                             </div>
                         `
