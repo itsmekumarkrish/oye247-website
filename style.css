@@ -2584,23 +2584,23 @@ body.modal-open {
 
 /* --- WhatsApp Hero Button --- */
 .btn-wa {
-    background: #25D366 !important;
+    background: linear-gradient(135deg, #1E8F7A, #28D3B5) !important;
     color: #fff !important;
     border: none !important;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 4px 20px rgba(40, 211, 181, 0.4);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
     font-weight: 700;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 
 .btn-wa:hover {
-    background: #1faa4e !important;
+    background: linear-gradient(135deg, #176b5c, #1faa91) !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+    box-shadow: 0 10px 30px rgba(40, 211, 181, 0.55);
 }
 
 .btn-wa i {
