@@ -380,12 +380,12 @@ ul {
     100% { transform: translateX(-50%); }
 }
 
-.select-search-input {
-    padding-left: 60px;
+.select-search-container i {
+    left: 18px !important;
 }
 
-.select-search-icon {
-    left: 18px;
+.select-search-input {
+    padding-left: 64px !important;
 }
 
 .logo-item {
