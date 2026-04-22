@@ -8,47 +8,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const waCtaArea = document.getElementById('wa-cta-area');
 
     // Toggle Chatbot
-    chatbotTrigger.addEventListener('click', () => {
-        chatbotWindow.classList.toggle('active');
-        if(chatbotWindow.classList.contains('active')) {
-            // Optional: reset chat if needed, but keeping state is fine for now
-            setTimeout(() => {
-                chatbotWindow.style.display = 'flex';
-            }, 10);
-        } else {
-            setTimeout(() => {
-                chatbotWindow.style.display = 'none';
-            }, 300); // match transition duration
-        }
-    });
+    if (chatbotTrigger && chatbotWindow) {
+        if(chatbotTrigger)chatbotTrigger.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
+            if(chatbotWindow.classList.contains('active')) {
+                setTimeout(() => {
+                    chatbotWindow.style.display = 'flex';
+                }, 10);
+            } else {
+                setTimeout(() => {
+                    chatbotWindow.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
 
-    closeChatBtn.addEventListener('click', () => {
-        chatbotWindow.classList.remove('active');
-        setTimeout(() => {
-            chatbotWindow.style.display = 'none';
-        }, 300);
-    });
-
-    // Setup initial state for display toggle properly
-    chatbotWindow.style.display = 'none';
-    
-    // Add event listener to the trigger to handle the block vs none display issue with transitions
-    chatbotTrigger.addEventListener('click', (e) => {
-        if(chatbotWindow.style.display === 'none') {
-            chatbotWindow.style.display = 'flex';
-            // Trigger reflow to ensure transition happens
-            void chatbotWindow.offsetWidth; 
-            chatbotWindow.classList.add('active');
-        } else {
+    if (closeChatBtn && chatbotWindow) {
+        if(closeChatBtn)closeChatBtn.addEventListener('click', () => {
             chatbotWindow.classList.remove('active');
             setTimeout(() => {
                 chatbotWindow.style.display = 'none';
             }, 300);
-        }
-    });
+        });
+    }
 
-    // Remove the duplicate listener above, just overriding it here to be safe
-    chatbotTrigger.replaceWith(chatbotTrigger.cloneNode(true));
+    if (chatbotWindow) chatbotWindow.style.display = 'none';
+    
+    if (chatbotTrigger && chatbotWindow) {
+        if(chatbotTrigger)chatbotTrigger.addEventListener('click', (e) => {
+            if(chatbotWindow.style.display === 'none') {
+                chatbotWindow.style.display = 'flex';
+                void chatbotWindow.offsetWidth; 
+                chatbotWindow.classList.add('active');
+            } else {
+                chatbotWindow.classList.remove('active');
+                setTimeout(() => {
+                    chatbotWindow.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+
+    if (chatbotTrigger) {
+        const newTrigger = chatbotTrigger.cloneNode(true);
+        chatbotTrigger.replaceWith(newTrigger);
+        // We need to re-assign our reference and re-add listeners to the new node
+        const updatedTrigger = document.getElementById('chatbot-trigger');
+        if (updatedTrigger && chatbotWindow) {
+            updatedTrigger.addEventListener('click', (e) => {
+                if(chatbotWindow.style.display === 'none') {
+                    chatbotWindow.style.display = 'flex';
+                    void chatbotWindow.offsetWidth; 
+                    chatbotWindow.classList.add('active');
+                } else {
+                    chatbotWindow.classList.remove('active');
+                    setTimeout(() => {
+                        chatbotWindow.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+    }
     const newChatbotTrigger = document.getElementById('chatbot-trigger');
     
     newChatbotTrigger.addEventListener('click', () => {
@@ -181,12 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Track mouse for parallax
         const heroSection = document.querySelector('.hero');
-        heroSection.addEventListener('mousemove', (e) => {
+        if(heroSection)heroSection.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             mouse.x = e.clientX - rect.left;
             mouse.y = e.clientY - rect.top;
         });
-        heroSection.addEventListener('mouseleave', () => {
+        if(heroSection)heroSection.addEventListener('mouseleave', () => {
             mouse.x = null;
             mouse.y = null;
         });
