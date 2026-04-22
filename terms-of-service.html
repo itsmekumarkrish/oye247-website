@@ -4,111 +4,474 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service | OyeHQ</title>
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Google Fonts -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="dark-theme">
-    <nav class="minimal-nav">
-        <a href="/" class="logo">
-            <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
-        </a>
-        <a href="/" class="back-link">
-            <i class="ph ph-arrow-left"></i> Back to Home
-        </a>
-    </nav>
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        :root {
+            --bg-deep: #0B0F14;
+            --bg-card: rgba(17, 21, 28, 0.6);
+            --accent-teal: #14F1D9;
+            --accent-violet: #8B5CF6;
+            --text-main: #FFFFFF;
+            --text-muted: #A1A1AA;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-glow: rgba(20, 241, 217, 0.15);
+        }
 
-    <main class="legal-page">
-        <div class="container">
-            <div class="legal-header">
-                <h1>Terms of Service</h1>
-                <p>Last updated: 2026</p>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Gradient Glows */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(20, 241, 217, 0.08) 0%, transparent 70%);
+            filter: blur(80px);
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: 10%;
+            right: -5%;
+            width: 35%;
+            height: 35%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+            filter: blur(80px);
+        }
+
+        /* Header / Navbar */
+        .navbar {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -0.04em;
+        }
+
+        .logo-oye { color: var(--accent-teal); }
+        .logo-hq { color: #fff; }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+        }
+
+        .back-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .updated-date {
+            color: var(--accent-teal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(20, 241, 217, 0.05);
+            border: 1px solid rgba(20, 241, 217, 0.1);
+            border-radius: 100px;
+            color: var(--accent-teal);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        /* Content Sections */
+        .legal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .legal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .section-title i {
+            color: var(--accent-teal);
+            font-size: 1.8rem;
+        }
+
+        .legal-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .legal-list li::before {
+            content: "\e086"; /* Phosphor Check icon */
+            font-family: "Phosphor";
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        /* Contact Highlight Section */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(20, 241, 217, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .contact-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #fff;
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 6rem 0 3rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 6rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .legal-card { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-bg">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+    </div>
+
+    <div class="container">
+        <header class="navbar">
+            <a href="/" class="logo">
+                <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
+            </a>
+            <a href="/" class="back-link">
+                <i class="ph ph-arrow-left"></i> Back to Home
+            </a>
+        </header>
+
+        <section class="hero">
+            <span class="updated-date">Last Updated: 2026</span>
+            <h1>Terms of Service</h1>
+            <div class="trust-badge">
+                <i class="ph ph-shield-check"></i> Standard Global SaaS Terms
+            </div>
+        </section>
+
+        <div class="legal-card" style="animation-delay: 0.1s">
+            <p class="intro-text">
+                Welcome to OyeHQ. By accessing or using our platform, you agree to comply with and be bound by these Terms of Service. These terms govern your use of our AI automation tools and services.
+            </p>
+        </div>
+
+        <div class="legal-card" style="animation-delay: 0.2s">
+            <div class="section-title">
+                <i class="ph ph-handshake"></i>
+                <h2>1. Acceptance of Terms</h2>
             </div>
             <div class="legal-content">
-                <p>Welcome to OyeHQ. By accessing or using our platform, you agree to comply with and be bound by these Terms of Service.</p>
-                <hr>
-                <h3>1. Acceptance of Terms</h3>
-                <p>By using OyeHQ, you agree to these Terms. If you do not agree to these terms, please do not use our services.</p>
-                <hr>
-                <h3>2. Service Description</h3>
-                <p>OyeHQ provides artificial intelligence automation tools designed to assist with lead generation, customer support, and operational workflows.</p>
-                <hr>
-                <h3>3. User Responsibilities</h3>
-                <ul>
-                    <li>You must provide accurate account information.</li>
-                    <li>You are responsible for maintaining the security of your account credentials.</li>
-                    <li>You agree not to use the service for any illegal or unauthorized purpose.</li>
-                </ul>
-                <hr>
-                <h3>4. Payment and Subscriptions</h3>
-                <p>Services are billed on a subscription basis. You will be billed in advance on a recurring schedule. Failure to pay may result in suspension of services.</p>
-                <hr>
-                <h3>5. Intellectual Property</h3>
-                <p>All content, features, and functionality of the OyeHQ platform are owned by OyeHQ and are protected by international copyright and trademark laws.</p>
-                <hr>
-                <h3>6. Limitation of Liability</h3>
-                <p>In no event shall OyeHQ be liable for any indirect, incidental, special, consequential or punitive damages resulting from your use of the service.</p>
-                <hr>
-                <h3>7. Termination</h3>
-                <p>We may terminate or suspend your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
-                <hr>
-                <h3>8. Contact Us</h3>
-                <p>If you have any questions about these Terms, please contact us at support@oyehq.com.</p>
+                <p>By using OyeHQ, you agree to these Terms. If you do not agree to these terms, please do not use our services. Your continued use of the platform constitutes your ongoing acceptance of any modifications we may make to these terms.</p>
             </div>
         </div>
-    </main>
 
-    <!-- Premium Footer -->
-    <footer class="footer">
-        <div class="container">
+        <div class="legal-card" style="animation-delay: 0.3s">
+            <div class="section-title">
+                <i class="ph ph-robot"></i>
+                <h2>2. Service Description</h2>
+            </div>
+            <div class="legal-content">
+                <p>OyeHQ provides state-of-the-art artificial intelligence automation tools designed to assist with lead generation, customer support, and operational workflows. We reserve the right to modify, suspend, or discontinue any part of the service at any time.</p>
+            </div>
+        </div>
+
+        <div class="legal-card" style="animation-delay: 0.4s">
+            <div class="section-title">
+                <i class="ph ph-user-focus"></i>
+                <h2>3. User Responsibilities</h2>
+            </div>
+            <div class="legal-content">
+                <p>To maintain a secure and efficient environment, you agree to the following responsibilities:</p>
+                <ul class="legal-list">
+                    <li>You must provide accurate and complete account information.</li>
+                    <li>You are solely responsible for maintaining the security of your account credentials.</li>
+                    <li>You agree not to use the service for any illegal or unauthorized purpose.</li>
+                    <li>You will not attempt to reverse engineer or disrupt the OyeHQ platform.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="legal-card" style="animation-delay: 0.5s">
+            <div class="section-title">
+                <i class="ph ph-credit-card"></i>
+                <h2>4. Payment and Subscriptions</h2>
+            </div>
+            <div class="legal-content">
+                <p>Services are billed on a subscription basis. You will be billed in advance on a recurring schedule (monthly or annually). Failure to maintain a valid payment method may result in the immediate suspension or termination of your services.</p>
+            </div>
+        </div>
+
+        <div class="legal-card" style="animation-delay: 0.6s">
+            <div class="section-title">
+                <i class="ph ph-copyright"></i>
+                <h2>5. Intellectual Property</h2>
+            </div>
+            <div class="legal-content">
+                <p>All content, features, and functionality of the OyeHQ platform—including but not limited to AI models, code, branding, and UI design—are owned by OyeHQ and are protected by international copyright and trademark laws.</p>
+            </div>
+        </div>
+
+        <div class="legal-card" style="animation-delay: 0.7s">
+            <div class="section-title">
+                <i class="ph ph-warning-octagon"></i>
+                <h2>6. Limitation of Liability</h2>
+            </div>
+            <div class="legal-content">
+                <p>In no event shall OyeHQ be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, or use, resulting from your use of the service or any AI-generated outputs.</p>
+            </div>
+        </div>
+
+        <div class="legal-card" style="animation-delay: 0.8s">
+            <div class="section-title">
+                <i class="ph ph-stop-circle"></i>
+                <h2>7. Termination</h2>
+            </div>
+            <div class="legal-content">
+                <p>We may terminate or suspend your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. Upon termination, your right to use the Service will immediately cease.</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h3>Questions about our Terms?</h3>
+            <p>Our legal team is here to clarify any points regarding our service agreement.</p>
+            <a href="mailto:support@oyehq.com" class="contact-btn">
+                <i class="ph ph-envelope-simple"></i> contact@oyehq.com
+            </a>
+        </div>
+
+        <footer class="footer">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="logo">
+                    <a href="/" class="logo">
                         <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span>
-                    </div>
-                    <p class="footer-desc">Automating the future of business. Capture leads, book meetings, and scale effortlessly with intelligent AI agents.</p>
-                    <div class="footer-socials">
-                        <a href="#"><i class="ph ph-facebook-logo"></i></a>
-                        <a href="#"><i class="ph ph-twitter-logo"></i></a>
-                        <a href="#"><i class="ph ph-linkedin-logo"></i></a>
-                        <a href="#"><i class="ph ph-instagram-logo"></i></a>
-                    </div>
+                    </a>
+                    <p>Automating the future of business. Capture leads, book meetings, and scale effortlessly with intelligent AI agents.</p>
                 </div>
-                
                 <div class="footer-links">
-                    <h4>Product</h4>
+                    <h4>Company</h4>
                     <ul>
-                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#how-it-works">How It Works</a></li>
                         <li><a href="/#use-cases">Use Cases</a></li>
-                        <li><a href="/#testimonials">Testimonials</a></li>
+                        <li><a href="mailto:support@oyehq.com">Contact Support</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-links">
-                    <h4>Support & Legal</h4>
+                    <h4>Legal</h4>
                     <ul>
                         <li><a href="/privacy-policy">Privacy Policy</a></li>
                         <li><a href="/terms-of-service">Terms of Service</a></li>
                         <li><a href="/refund-policy">Refund Policy</a></li>
-                        <li><a href="/disclaimer">Disclaimer</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2026 OyeHQ. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="/privacy-policy">Privacy</a>
-                    <span class="dot">•</span>
-                    <a href="/terms-of-service">Terms</a>
+                <div class="footer-socials" style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: var(--text-muted)"><i class="ph ph-twitter-logo"></i></a>
+                    <a href="#" style="color: var(--text-muted)"><i class="ph ph-linkedin-logo"></i></a>
                 </div>
             </div>
-        </div>
-    </footer>
-
-
-    <script src="main.js"></script>
+        </footer>
+    </div>
 </body>
 </html>
