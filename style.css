@@ -2120,7 +2120,8 @@ section {
     }
 
     /* Section padding normalization for mobile */
-    .hero { padding-top: 120px; padding-bottom: 60px; }
+    /* Section padding normalization for mobile */
+    .hero { padding-top: 60px; padding-bottom: 50px; }
     .problem, .use-cases, .solution, .how-it-works, .testimonials, .faq, .contact, .cta-section {
         padding: 60px 0;
     }
@@ -2583,13 +2584,15 @@ body.modal-open {
     background: #25D366 !important;
     color: #fff !important;
     border: none !important;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.8rem;
     padding: 1.1rem 2.2rem;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .btn-wa:hover {
