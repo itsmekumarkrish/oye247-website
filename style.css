@@ -1433,20 +1433,7 @@ section {
 }
 
 .footer-brand .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: -0.02em;
-    color: var(--text-main);
     margin-bottom: 1.5rem;
-}
-
-.footer-brand .logo i {
-    color: var(--accent-teal);
-    font-size: 1.8rem;
 }
 
 .footer-desc {
