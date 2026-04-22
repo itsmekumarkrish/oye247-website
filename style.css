@@ -380,6 +380,14 @@ ul {
     100% { transform: translateX(-50%); }
 }
 
+.select-search-input {
+    padding-left: 60px;
+}
+
+.select-search-icon {
+    left: 18px;
+}
+
 .logo-item {
     display: flex;
     align-items: center;
@@ -2437,7 +2445,7 @@ body.modal-open {
 
 .select-search-container i {
     position: absolute;
-    left: 20px;
+    left: 18px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--accent-teal);
@@ -2449,7 +2457,7 @@ body.modal-open {
 .select-search-input {
     width: 100%;
     height: 42px;
-    padding: 0 12px 0 52px;
+    padding: 0 12px 0 60px !important;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px;
