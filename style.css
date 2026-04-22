@@ -2547,8 +2547,15 @@ body.modal-open {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1.1rem 1.2rem 0.6rem;
-    min-height: 54px;
+    min-height: 52px;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.floating-group select {
+    min-height: 52px;
 }
 
 .custom-select-group label {
