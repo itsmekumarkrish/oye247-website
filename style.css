@@ -134,17 +134,22 @@ ul {
 
 .logo {
     font-family: 'Outfit', sans-serif;
-    letter-spacing: -0.02em;
-    font-size: 1.5rem;
-    font-weight: 700;
+    letter-spacing: -0.04em;
+    font-size: 1.7rem;
+    font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--text-main);
+    text-decoration: none;
+    line-height: 1;
 }
 
-.logo i {
+.logo .logo-oye {
     color: var(--accent-teal);
+}
+
+.logo .logo-hq {
+    color: #FFFFFF;
+    margin-left: 1px;
 }
 
 .nav-right {
