@@ -430,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modeInput) modeInput.value = 'automation';
             }
 
+            contactModal.querySelectorAll('.select-search-input').forEach(input => input.value = '');
             contactModal.classList.add('active');
             document.body.classList.add('modal-open');
         }
