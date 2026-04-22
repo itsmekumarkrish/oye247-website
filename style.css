@@ -1992,7 +1992,8 @@ section {
         gap: 2.5rem;
     }
     .form-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
     }
     .contact-form-card {
         padding: 1.8rem;
@@ -2183,8 +2184,8 @@ section {
     
     /* Form */
     .form-row {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.8rem;
     }
     
     /* Hide desktop nav inside existing max-width: 768px if not already handled */
