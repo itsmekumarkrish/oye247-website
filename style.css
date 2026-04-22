@@ -2427,33 +2427,49 @@ body.modal-open {
 }
 
 .select-search-container {
-    position: relative;
-    margin-bottom: 10px;
+    padding: 0.8rem;
+    position: sticky;
+    top: 0;
+    background: #111;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .select-search-container i {
     position: absolute;
-    left: 12px;
+    left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
 }
 
 .select-search-input {
     width: 100%;
-    padding: 10px 10px 10px 38px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    padding: 0.7rem 1rem 0.7rem 2.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
     color: #fff;
     font-size: 0.9rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.select-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .select-search-input:focus {
     outline: none;
     border-color: var(--accent-teal);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 15px rgba(20, 241, 217, 0.1);
+}
+
+.select-search-input:focus + i {
+    color: var(--accent-teal);
 }
 
 .select-options-list {
