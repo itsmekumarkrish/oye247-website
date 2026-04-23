@@ -1042,6 +1042,7 @@ section {
 .floating-group textarea,
 .floating-group select {
     width: 100%;
+    height: 62px; /* Force consistent height */
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
@@ -2575,7 +2576,7 @@ body.modal-open {
 }
 
 .floating-group select {
-    min-height: 52px;
+    height: 62px;
 }
 
 .custom-select-group label {
