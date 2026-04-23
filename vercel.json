@@ -4,6 +4,18 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "style.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "main.js",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -12,13 +24,40 @@
       "dest": "server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1",
-      "continue": true
+      "src": "/privacy-policy",
+      "dest": "privacy-policy.html"
+    },
+    {
+      "src": "/terms-of-service",
+      "dest": "terms-of-service.html"
+    },
+    {
+      "src": "/refund-policy",
+      "dest": "refund-policy.html"
+    },
+    {
+      "src": "/disclaimer",
+      "dest": "disclaimer.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "contact.html"
+    },
+    {
+      "src": "/proposal",
+      "dest": "proposal.html"
+    },
+    {
+      "src": "/style.css",
+      "dest": "style.css"
+    },
+    {
+      "src": "/main.js",
+      "dest": "main.js"
     },
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "index.html"
     }
   ]
 }
