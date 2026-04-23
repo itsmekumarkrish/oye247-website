@@ -16,6 +16,14 @@
     {
       "src": "main.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "robots.txt",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "sitemap.xml",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -42,6 +50,14 @@
     {
       "src": "/contact",
       "dest": "contact.html"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "robots.txt"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "sitemap.xml"
     },
     {
       "src": "/style.css",
