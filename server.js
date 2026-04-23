@@ -213,14 +213,14 @@ app.post('/api/contact', async (req, res, next) => {
 
 // Serve index.html for root
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(process.cwd(), 'index.html'));
 });
 
 // Legal Pages Routes
 const legalPages = ['privacy-policy', 'refund-policy', 'disclaimer', 'terms-of-service', 'contact', 'proposal'];
 legalPages.forEach(page => {
     app.get(`/${page}`, (req, res) => {
-        res.sendFile(path.join(__dirname, `${page}.html`));
+        res.sendFile(path.join(process.cwd(), `${page}.html`));
     });
 });
 
@@ -234,10 +234,14 @@ app.use((err, req, res, next) => {
     });
 });
 
-// 8. Make sure there are NO hardcoded ports like 3000 in app.listen
-// 9. Optimize for Render deployment: No localhost dependencies, clean console logs
-app.listen(PORT, () => {
-    console.log(`🚀 Server is live on port ${PORT}`);
-});
+// Export for Vercel
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`🚀 Local server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
 
 // Triggering Railway Domain Sync - Wed Apr 22 19:49:35 +0545 2026
