@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Automation Proposal | OyeHQ</title>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --accent-teal: #14F1D9;
+            --accent-purple: #8B5CF6;
+            --text-main: #ffffff;
+            --text-dim: #A1A1AA;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .proposal-hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+            background: radial-gradient(circle at top center, rgba(20, 241, 217, 0.05) 0%, transparent 70%);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(20, 241, 217, 0.1);
+            border: 1px solid rgba(20, 241, 217, 0.2);
+            border-radius: 100px;
+            color: var(--accent-teal);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .proposal-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .proposal-hero p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Proposal Card Grid --- */
+        .proposal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(20, 241, 217, 0.3);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(20, 241, 217, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+        }
+
+        .glass-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .glass-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* --- ROI Section --- */
+        .roi-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .roi-box {
+            background: linear-gradient(135deg, rgba(20, 241, 217, 0.05), rgba(139, 92, 246, 0.05));
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 4rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .roi-item h2 {
+            font-size: 3rem;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Pricing --- */
+        .pricing-section {
+            padding: 4rem 0 8rem;
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 30px rgba(20, 241, 217, 0.1);
+        }
+
+        .price-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dim);
+        }
+
+        .price-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-dim);
+        }
+
+        .price-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .price-features li {
+            margin-bottom: 1rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .price-features i {
+            color: var(--accent-teal);
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent-teal);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        /* --- Print Styles --- */
+        @media print {
+            body { background: white; color: black; }
+            .glass-card, .roi-box, .price-card { 
+                border: 1px solid #ddd; 
+                background: white; 
+                backdrop-filter: none;
+                color: black;
+            }
+            .proposal-hero h1 { -webkit-text-fill-color: black; }
+            .btn { display: none; }
+            .no-print { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .roi-grid { grid-template-columns: 1fr; }
+            .proposal-hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="proposal-hero">
+        <div class="container">
+            <div class="badge">Custom Solution Proposal</div>
+            <h1 id="user-greeting">Automation Strategy</h1>
+            <p>A tailored roadmap to transform your business operations with world-class AI agents.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="proposal-grid">
+            <div class="glass-card">
+                <div class="card-icon"><i class="ph ph-phone-call"></i></div>
+                <h3>24/7 AI Voice Agent</h3>
+                <p>Never miss a lead again. Our AI handles inbound and outbound calls with human-like empathy, booking meetings while you sleep.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon"><i class="ph ph-chat-centered-dots"></i></div>
+                <h3>Smart CRM Sync</h3>
+                <p>Automatically update your leads, transcripts, and customer data directly into your database. No more manual entry.</p>
+            </div>
+            <div class="glass-card">
+                <div class="card-icon"><i class="ph ph-lightning"></i></div>
+                <h3>Instant Response</h3>
+                <p>The "Golden Window" for leads is 5 minutes. Our AI contacts new leads within 30 seconds of form submission.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="roi-section container">
+        <div class="roi-box">
+            <h2>Estimated Impact</h2>
+            <p style="margin-bottom: 3rem;">Based on our conversation, here is how we can scale your growth.</p>
+            <div class="roi-grid">
+                <div class="roi-item">
+                    <h2>90%</h2>
+                    <p>Reduction in Manual Tasks</p>
+                </div>
+                <div class="roi-item">
+                    <h2>3X</h2>
+                    <p>Increase in Lead Response</p>
+                </div>
+                <div class="roi-item">
+                    <h2>24/7</h2>
+                    <p>Global Availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section container">
+        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Investment Packages</h2>
+        <div class="pricing-table">
+            <div class="price-card">
+                <h4>Starter Automation</h4>
+                <div class="price">$499<span>/mo</span></div>
+                <ul class="price-features">
+                    <li><i class="ph ph-check"></i> Basic Voice Agent</li>
+                    <li><i class="ph ph-check"></i> Email Integration</li>
+                    <li><i class="ph ph-check"></i> 500 Call Minutes</li>
+                </ul>
+                <a href="https://wa.me/yourphone" class="btn">Get Started</a>
+            </div>
+            <div class="price-card featured">
+                <div class="badge" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); margin: 0;">Most Popular</div>
+                <h4>Scale Engine</h4>
+                <div class="price">$999<span>/mo</span></div>
+                <ul class="price-features">
+                    <li><i class="ph ph-check"></i> Advanced Voice Agent</li>
+                    <li><i class="ph ph-check"></i> Full CRM Integration</li>
+                    <li><i class="ph ph-check"></i> 1,500 Call Minutes</li>
+                    <li><i class="ph ph-check"></i> Custom AI Personality</li>
+                </ul>
+                <a href="https://wa.me/yourphone" class="btn">Select Plan</a>
+            </div>
+            <div class="price-card">
+                <h4>Enterprise</h4>
+                <div class="price">Custom</div>
+                <ul class="price-features">
+                    <li><i class="ph ph-check"></i> Multi-Agent Orchestration</li>
+                    <li><i class="ph ph-check"></i> Custom Backend API</li>
+                    <li><i class="ph ph-check"></i> Dedicated Support</li>
+                </ul>
+                <a href="https://wa.me/yourphone" class="btn">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container no-print" style="padding-bottom: 8rem; text-align: center;">
+        <p style="color: var(--text-dim); margin-bottom: 2rem;">Ready to automate your future?</p>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <button onclick="window.print()" class="btn" style="width: auto; background: transparent; border: 1px solid var(--accent-teal); color: var(--accent-teal);">Download as PDF</button>
+            <a href="https://wa.me/yourphone" class="btn" style="width: auto;">Chat on WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        // Personalize the proposal based on URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const business = urlParams.get('business');
+
+        if (name) {
+            document.getElementById('user-greeting').textContent = `${name}'s Strategy`;
+        }
+    </script>
+</body>
+</html>

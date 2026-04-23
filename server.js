@@ -177,6 +177,13 @@ app.post('/api/contact', async (req, res, next) => {
                                 <p style="color: #A1A1AA; line-height: 1.8; font-size: 15px;">
                                     If your request is urgent, you can reply to this email or connect with us on WhatsApp.
                                 </p>
+                                <div style="text-align: center; margin: 35px 0;">
+                                    <a href="https://www.oyehq.com/proposal?name=${encodeURIComponent(name)}&business=${encodeURIComponent(business)}" 
+                                       style="background: #14F1D9; color: #0a0a0f; padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-block;">
+                                        View My Custom Proposal
+                                    </a>
+                                </div>
+
                                 <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
                                     <p style="color: #A1A1AA; line-height: 1.8; font-size: 15px;">
                                         We look forward to helping you automate and grow your business.
@@ -210,7 +217,7 @@ app.get('/', (req, res) => {
 });
 
 // Legal Pages Routes
-const legalPages = ['privacy-policy', 'refund-policy', 'disclaimer', 'terms-of-service', 'contact'];
+const legalPages = ['privacy-policy', 'refund-policy', 'disclaimer', 'terms-of-service', 'contact', 'proposal'];
 legalPages.forEach(page => {
     app.get(`/${page}`, (req, res) => {
         res.sendFile(path.join(__dirname, `${page}.html`));
