@@ -2643,3 +2643,76 @@ body.modal-open {
     margin-left: 2px;
     font-size: 1.1rem;
 }
+
+/* --- Impact Section --- */
+.impact-section {
+    padding: 100px 0;
+}
+
+.impact-card {
+    padding: 80px 60px;
+    text-align: center;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.impact-header h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.impact-header p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.impact-value {
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: var(--accent-teal);
+    margin-bottom: 1rem;
+    font-family: 'Outfit', sans-serif;
+    text-shadow: 0 0 30px rgba(20, 241, 217, 0.4);
+}
+
+.impact-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+@media (max-width: 992px) {
+    .impact-grid {
+        gap: 2rem;
+    }
+    .impact-value {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .impact-card {
+        padding: 60px 30px;
+    }
+    .impact-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+    .impact-header h2 {
+        font-size: 2.2rem;
+    }
+}
