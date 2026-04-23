@@ -146,8 +146,31 @@ app.post('/api/contact', async (req, res, next) => {
                             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background: #0a0a0f; color: #ffffff; border-radius: 12px;">
                                 <h2 style="color: #14F1D9; margin-bottom: 10px;">Thank You, ${name}!</h2>
                                 <p style="color: #A1A1AA; line-height: 1.8; font-size: 15px;">
-                                    We've received your request for a personalized AI automation plan and our team is currently reviewing your details to better understand your business needs.
+                                    Thank you for choosing <strong>OyeHQ</strong>. We have received your request for an AI Automation plan, and we are already reviewing your details.
                                 </p>
+                                
+                                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin: 25px 0;">
+                                    <h4 style="color: #FFFFFF; margin-top: 0; margin-bottom: 15px; font-size: 16px;">Submission Summary:</h4>
+                                    <table style="width: 100%; border-collapse: collapse;">
+                                        <tr>
+                                            <td style="color: #A1A1AA; padding: 5px 0; font-size: 14px; width: 120px;">Name:</td>
+                                            <td style="color: #FFFFFF; padding: 5px 0; font-size: 14px;">${name}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: #A1A1AA; padding: 5px 0; font-size: 14px;">Business:</td>
+                                            <td style="color: #FFFFFF; padding: 5px 0; font-size: 14px;">${business}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: #A1A1AA; padding: 5px 0; font-size: 14px;">Phone:</td>
+                                            <td style="color: #FFFFFF; padding: 5px 0; font-size: 14px;">${phone}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: #A1A1AA; padding: 5px 0; font-size: 14px;">Leads/Mo:</td>
+                                            <td style="color: #FFFFFF; padding: 5px 0; font-size: 14px;">${leads || 'N/A'}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
                                 <p style="color: #A1A1AA; line-height: 1.8; font-size: 15px;">
                                     One of our specialists will connect with you shortly to walk you through the next steps and show how AI can help automate your workflows, capture more leads, and improve conversions.
                                 </p>
