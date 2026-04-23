@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modeInput) modeInput.value = 'automation';
             }
 
-            contactModal.querySelectorAll('.select-search-input').forEach(input => input.value = '');
+
             contactModal.classList.add('active');
             document.body.classList.add('modal-open');
         }
@@ -484,98 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Searchable Dropdown Logic (Refactored for Multiple Instances) ---
-    function initClassicDropdown(wrapper) {
-        const trigger = wrapper.querySelector('.select-trigger');
-        const dropdown = wrapper.querySelector('.select-dropdown');
-        const searchInput = wrapper.querySelector('.select-search-input');
-        const optionsList = wrapper.querySelectorAll('.select-option');
-        const hiddenInput = wrapper.querySelector('input[type="hidden"]');
-        const triggerText = trigger?.querySelector('.trigger-text');
-        
-        const form = wrapper.closest('form');
-        const otherWrap = form?.querySelector('.other-business-container');
-        const otherInput = form?.querySelector('.other-business-input');
 
-        if (trigger) {
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                // Close others
-                document.querySelectorAll('.custom-select-wrapper').forEach(w => {
-                    if (w !== wrapper) w.classList.remove('active');
-                });
-                wrapper.classList.toggle('active');
-                if (wrapper.classList.contains('active') && searchInput) {
-                    searchInput.focus();
-                }
-            });
-        }
-
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const filter = e.target.value.toLowerCase();
-                let hasResults = false;
-                optionsList.forEach(option => {
-                    const text = option.textContent.toLowerCase();
-                    if (text.includes(filter)) {
-                        option.style.display = 'block';
-                        hasResults = true;
-                    } else {
-                        option.style.display = 'none';
-                    }
-                });
-                const noResults = wrapper.querySelector('.no-results');
-                if (noResults) noResults.style.display = hasResults ? 'none' : 'block';
-            });
-            searchInput.addEventListener('click', (e) => e.stopPropagation());
-        }
-
-        optionsList.forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const value = option.getAttribute('data-value');
-                const text = option.textContent;
-
-                if (triggerText) triggerText.textContent = text;
-                if (trigger) trigger.style.borderColor = 'rgba(20, 241, 217, 0.3)';
-                
-                const group = wrapper.closest('.floating-group');
-                if (value === 'Other') {
-                    if (otherWrap) otherWrap.classList.add('active');
-                    if (otherInput) {
-                        otherInput.focus();
-                        if (hiddenInput) hiddenInput.value = otherInput.value;
-                    }
-                    if (group) group.classList.add('valid');
-                } else {
-                    if (otherWrap) otherWrap.classList.remove('active');
-                    if (hiddenInput) hiddenInput.value = value;
-                    if (group) group.classList.add('valid');
-                }
-
-                checkFormValidity(form);
-                wrapper.classList.remove('active');
-                optionsList.forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-            });
-        });
-
-        if (otherInput) {
-            otherInput.addEventListener('input', () => {
-                if (hiddenInput) {
-                    hiddenInput.value = otherInput.value;
-                    checkFormValidity(form);
-                }
-            });
-        }
-    }
-
-    document.querySelectorAll('.custom-select-wrapper').forEach(initClassicDropdown);
-
-    // Close all on outside click
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('active'));
-    });
 
     // --- Unified Validation Logic ---
     function isValidEmail(email) {
