@@ -32,7 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Chat Message Logic
+    // Chatbot Memory & Flow
+    let chatState = {
+        step: 'greeting',
+        data: {
+            name: '',
+            industry: '',
+            interest: ''
+        }
+    };
+
     function addMessage(text, sender = 'bot') {
         const msgDiv = document.createElement('div');
         msgDiv.className = `chat-message ${sender}-message`;
@@ -56,14 +65,42 @@ document.addEventListener('DOMContentLoaded', () => {
         addMessage(text, 'user');
         chatInput.value = '';
         
-        // Simple Bot Response Simulation
+        // Advanced Bot Logic with Memory
         setTimeout(() => {
-            let response = "I'm processing that for you. Would you like to see a custom demo of how our AI can help your specific business?";
-            if (text.toLowerCase().includes('price') || text.toLowerCase().includes('cost')) {
-                response = "Our automation plans are customized based on your business volume. I can get you a personalized quote if you share your business type!";
-            } else if (text.toLowerCase().includes('hi') || text.toLowerCase().includes('hello')) {
-                response = "Hello! I'm the OyeHQ AI assistant. How can I help you automate your growth today?";
+            let response = "";
+            const input = text.toLowerCase();
+
+            if (chatState.step === 'greeting') {
+                response = `Nice to meet you! To give you the best automation strategy, what industry is your business in? (e.g. Real Estate, E-commerce, SaaS)`;
+                chatState.step = 'ask_industry';
+            } 
+            else if (chatState.step === 'ask_industry') {
+                chatState.data.industry = text;
+                response = `Got it, ${text} has huge potential for AI! What is your biggest bottleneck right now? Is it lead capture, following up with customers, or manual data entry?`;
+                chatState.step = 'ask_bottleneck';
             }
+            else if (chatState.step === 'ask_bottleneck') {
+                chatState.data.interest = text;
+                response = `I see. We've helped other ${chatState.data.industry} companies solve exactly that. Would you like to see a 5-minute custom demo of how our AI can automate your ${text}?`;
+                chatState.step = 'offer_demo';
+            }
+            else if (chatState.step === 'offer_demo') {
+                if (input.includes('yes') || input.includes('sure') || input.includes('yep')) {
+                    response = `Perfect! I'll have one of our automation specialists reach out with a custom demo for your business. You can also click the "Get Your Plan" button on the site to speed things up!`;
+                } else {
+                    response = `No problem! I'm here if you have any other questions about how OyeHQ can scale your growth with AI.`;
+                }
+                chatState.step = 'final';
+            }
+            else {
+                // Fallback for general questions if flow is complete
+                if (input.includes('price') || input.includes('cost')) {
+                    response = "Our custom AI solutions start with a free consultation to find the best ROI for you. Most clients see a return on investment within the first 30 days!";
+                } else {
+                    response = "I'm here to help! Is there anything specific about OyeHQ's automation you'd like to know?";
+                }
+            }
+            
             addMessage(response, 'bot');
         }, 1000);
     }
