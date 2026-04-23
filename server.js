@@ -8,10 +8,13 @@ const app = express();
 // 1. Ensure the server uses dynamic port
 const PORT = process.env.PORT || 8080;
 
-// 2. Verify Express setup
+// 2. Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static files (CSS, JS, Images)
+app.use(express.static(process.cwd()));
 app.use(express.static(path.join(__dirname)));
 
 // Health check for Railway
