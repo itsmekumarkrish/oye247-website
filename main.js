@@ -503,12 +503,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const phoneValid = phoneInput && phoneInput.value.trim().length >= 6;
         const businessValid = businessInput && businessInput.value !== "";
 
+        const emailValid = emailInput && isValidEmail(emailInput.value.trim());
+
         if (nameInput) updateFieldValidation(nameInput, nameValid);
         if (phoneInput) updateFieldValidation(phoneInput, phoneValid);
-        if (emailInput) updateFieldValidation(emailInput, emailInput.value.trim() === '' || isValidEmail(emailInput.value.trim()));
+        if (emailInput) updateFieldValidation(emailInput, emailValid);
 
         if (submitBtn) {
-            submitBtn.disabled = !(nameValid && phoneValid && businessValid);
+            submitBtn.disabled = !(nameValid && phoneValid && businessValid && emailValid);
         }
     }
 
