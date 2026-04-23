@@ -1434,15 +1434,24 @@ section {
 }
 
 .footer-brand .logo {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-url {
+    color: var(--accent-teal);
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
 }
 
 .footer-desc {
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--text-muted);
     font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    max-width: 300px;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 320px;
 }
 
 .footer-socials {

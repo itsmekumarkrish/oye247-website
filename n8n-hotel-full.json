@@ -1,0 +1,155 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-inbound",
+        "options": {}
+      },
+      "name": "WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notesInFlow": true,
+      "notes": "Receives guest message from WhatsApp"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": {
+          "message": [
+            {
+              "role": "system",
+              "content": "You are a hotel assistant. Extract Room Number, Category (Food, Housekeeping, Items, Laundry, WiFi, Reception), and specific Details. Return JSON only."
+            },
+            {
+              "content": "={{$json.body.message}}"
+            }
+          ]
+        },
+        "jsonOutput": true
+      },
+      "name": "AI Intent Extraction",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [320, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.category}}",
+              "value2": "Food"
+            }
+          ]
+        }
+      },
+      "name": "Is Food Order?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [540, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "YOUR_GOOGLE_SHEET_ID",
+        "range": "ORDERS!A:E",
+        "options": {}
+      },
+      "name": "Log Food Order",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [760, 200]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "YOUR_GOOGLE_SHEET_ID",
+        "range": "REQUESTS!A:E",
+        "options": {}
+      },
+      "name": "Log Service Request",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [760, 400]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_STAFF_CHAT_ID",
+        "text": "=🚨 *NEW REQUEST*\n\n*Room:* {{$json[\"room\"]}}\n*Type:* {{$json[\"category\"]}}\n*Details:* {{$json[\"details\"]}}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "name": "Notify Staff App",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1000, 300]
+    }
+  ],
+  "connections": {
+    "WhatsApp Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Intent Extraction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Intent Extraction": {
+      "main": [
+        [
+          {
+            "node": "Is Food Order?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Food Order?": {
+      "main": [
+        [
+          {
+            "node": "Log Food Order",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Service Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Food Order": {
+      "main": [
+        [
+          {
+            "node": "Notify Staff App",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Service Request": {
+      "main": [
+        [
+          {
+            "node": "Notify Staff App",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

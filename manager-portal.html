@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omana | Staff Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #FFF9F3;
+            --card-bg: #FFFFFF;
+            --accent-red: #FF3B30;
+            --accent-orange: #FFB340;
+            --text-black: #1C1C1E;
+            --text-grey: #8E8E93;
+            --soft-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --border-radius: 24px;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-black);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Responsive Layout Container */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding-bottom: 120px;
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 1024px) {
+            .app-container {
+                flex-direction: row;
+            }
+            main {
+                max-width: 1200px;
+                margin-left: var(--sidebar-width);
+                padding: 40px 60px;
+            }
+            .item-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                gap: 25px;
+            }
+            .active-orders-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                gap: 20px;
+            }
+            header {
+                max-width: 100% !important;
+                text-align: left !important;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px !important;
+            }
+            .back-btn { display: none !important; }
+            h1 { margin-bottom: 0 !important; font-size: 44px !important; }
+            .search-row { margin-bottom: 0 !important; width: 400px; }
+            .live-pill { position: static !important; }
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            padding: 10px 0 30px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 15px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .live-pill {
+            position: absolute;
+            right: 0;
+            top: 12px;
+            background: var(--accent-red);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.25);
+        }
+
+        .live-pill::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .search-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0,0,0,0.03);
+            padding: 12px 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .address-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-black);
+            opacity: 0.8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .add-btn {
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+        }
+
+        /* Section Titles */
+        .section-header {
+            font-size: 20px;
+            font-weight: 900;
+            margin: 25px 0 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: -0.5px;
+        }
+
+        /* Item Cards */
+        .item-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            position: relative;
+            box-shadow: var(--soft-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .thumb-box {
+            width: 90px;
+            height: 90px;
+            background: #FDE8D4;
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 19px;
+            font-weight: 900;
+            margin-bottom: 3px;
+        }
+
+        .item-category {
+            font-size: 14px;
+            color: var(--text-grey);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            background: var(--accent-red);
+            color: white;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 5px 12px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .item-edit {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* Toggle System */
+        .toggle-group {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: center;
+        }
+
+        .toggle-txt {
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--text-grey);
+            margin-bottom: 6px;
+        }
+
+        .toggle-switch {
+            width: 62px;
+            height: 24px;
+            background: #4A4A4F;
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle-knob {
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            width: 28px;
+            height: 18px;
+            background: var(--accent-orange);
+            border-radius: 5px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .item-card.on .toggle-knob { transform: translateX(28px); }
+
+        /* Order Cards */
+        .order-card {
+            background: white;
+            border-radius: 22px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: var(--soft-shadow);
+            border-left: 6px solid var(--accent-red);
+        }
+
+        .room-num { color: var(--accent-red); font-weight: 900; }
+        .order-content { font-weight: 700; font-size: 16px; margin: 15px 0; }
+        .order-btns { display: flex; gap: 12px; }
+        .mini-btn { flex: 1; padding: 12px; border-radius: 12px; border: none; font-size: 13px; font-weight: 900; cursor: pointer; }
+        .btn-red { background: var(--accent-red); color: white; }
+        .btn-outline { background: #F2F2F7; color: #444; }
+
+        /* Sidebar (Desktop Only) */
+        aside {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: white;
+            padding: 40px;
+            border-right: 1px solid rgba(0,0,0,0.05);
+            flex-direction: column;
+            z-index: 1001;
+        }
+
+        @media (min-width: 1024px) {
+            aside { display: flex; }
+            nav { display: none !important; }
+        }
+
+        .sidebar-logo {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 60px;
+            color: var(--text-black);
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-grey);
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .sidebar-link.active {
+            background: var(--bg-cream);
+            color: var(--accent-orange);
+        }
+
+        .sidebar-icon { font-size: 20px; }
+
+        /* Footer (Mobile Only) */
+        nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            height: 75px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            z-index: 1000;
+            padding: 0 10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #C7C7CC;
+            font-size: 10px;
+            font-weight: 800;
+            width: 60px;
+            transition: 0.3s;
+        }
+
+        .nav-link.active {
+            color: var(--accent-orange);
+        }
+
+        /* The Pill Indicator */
+        .nav-link.active::after {
+            content: "";
+            width: 4px;
+            height: 4px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            transition: transform 0.2s;
+        }
+
+        .nav-link.active .nav-icon {
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside>
+            <div class="sidebar-logo">Omana</div>
+            <a href="#" class="sidebar-link active">
+                <span class="sidebar-icon">🍴</span>
+                <span>Menu Management</span>
+            </a>
+            <a href="#" class="sidebar-link">
+                <span class="sidebar-icon">🔔</span>
+                <span>Live Orders</span>
+            </a>
+            <a href="#" class="sidebar-link">
+                <span class="sidebar-icon">📈</span>
+                <span>Performance</span>
+            </a>
+            <a href="#" class="sidebar-link" style="margin-top: auto;">
+                <span class="sidebar-icon">⚙️</span>
+                <span>Settings</span>
+            </a>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main>
+            <header>
+                <div class="back-btn">‹</div>
+                <div class="live-pill">LIVE</div>
+                <h1>Omana</h1>
+                
+                <div class="search-row">
+                    <span class="search-icon">🔍</span>
+                    <div class="address-text">123 Anywhere St., Any City, ST 12345</div>
+                    <div class="add-btn" onclick="alert('Add triggered')">+</div>
+                </div>
+            </header>
+
+            <!-- Menu View Section -->
+            <div id="menu-view">
+                <div class="section-header">
+                    <span>MENU ITEMS</span>
+                    <span style="font-size: 14px; color: var(--accent-orange); cursor: pointer;">Sort by Category ›</span>
+                </div>
+
+                <div class="item-list">
+                    <!-- Okinawa Soba -->
+                    <div class="item-card on">
+                        <div class="thumb-box">
+                            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=200&auto=format&fit=crop" alt="Ramen">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Okinawa Soba</div>
+                            <div class="item-category">Ramen</div>
+                            <div class="status-badge">in stock: 20</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sashimi -->
+                    <div class="item-card on">
+                        <div class="thumb-box" style="background-color: #F8E6D4;">
+                            <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=200&auto=format&fit=crop" alt="Sashimi">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Sashimi Special</div>
+                            <div class="item-category">Sushi</div>
+                            <div class="status-badge">in stock: 20</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Takoyaki -->
+                    <div class="item-card">
+                        <div class="thumb-box" style="background-color: #E9DDCB;">
+                            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=200&auto=format&fit=crop" alt="Takoyaki">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Takoyaki Family</div>
+                            <div class="item-category">Snack</div>
+                            <div class="status-badge">in stock: 20</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unagi Don -->
+                    <div class="item-card on">
+                        <div class="thumb-box" style="background-color: #F8D7D0;">
+                            <img src="https://images.unsplash.com/photo-1534604973900-c41ab4c94f7b?q=80&w=200&auto=format&fit=crop" alt="Unagi">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Unagi Kabayaki</div>
+                            <div class="item-category">Rice Bowl</div>
+                            <div class="status-badge">in stock: 12</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matcha Ice Cream -->
+                    <div class="item-card on">
+                        <div class="thumb-box" style="background-color: #D4F8D4;">
+                            <img src="https://images.unsplash.com/photo-1528750955923-b964983dce18?q=80&w=200&auto=format&fit=crop" alt="Matcha">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Matcha Gelato</div>
+                            <div class="item-category">Dessert</div>
+                            <div class="status-badge">in stock: 45</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Miso Soup -->
+                    <div class="item-card on">
+                        <div class="thumb-box" style="background-color: #FFF2D4;">
+                            <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=200&auto=format&fit=crop" alt="Miso">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Miso Soup</div>
+                            <div class="item-category">Side</div>
+                            <div class="status-badge">in stock: 30</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tempura -->
+                    <div class="item-card on">
+                        <div class="thumb-box" style="background-color: #F8F4D4;">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=200&auto=format&fit=crop" alt="Tempura">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Ebi Tempura</div>
+                            <div class="item-category">Appetizer</div>
+                            <div class="status-badge">in stock: 18</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premium Sake -->
+                    <div class="item-card on">
+                        <div class="thumb-box" style="background-color: #D4EBF8;">
+                            <img src="https://images.unsplash.com/photo-1600494603989-9650cf6dad51?q=80&w=200&auto=format&fit=crop" alt="Sake">
+                        </div>
+                        <div class="item-info">
+                            <div class="item-title">Junmai Daiginjo</div>
+                            <div class="item-category">Drinks</div>
+                            <div class="status-badge">in stock: 8</div>
+                        </div>
+                        <div class="item-edit">✏️</div>
+                        <div class="toggle-group">
+                            <div class="toggle-txt">OFF - ON</div>
+                            <div class="toggle-switch" onclick="handleToggle(this)">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders View Section (Hidden by Default) -->
+            <div id="orders-view" style="display: none;">
+                <div class="section-header">
+                    <span>ACTIVE ORDERS</span>
+                    <span style="font-size: 14px; color: var(--accent-red); cursor: pointer;">View Archive ›</span>
+                </div>
+
+                <div class="active-orders-grid">
+                    <div class="order-card">
+                        <div class="order-meta">
+                            <span class="room-num">ROOM 203</span>
+                            <span>2:30 PM</span>
+                        </div>
+                        <div class="order-content">2x Veg Biryani, 1x Coke Zero</div>
+                        <div class="order-btns">
+                            <button class="mini-btn btn-red">MARK READY</button>
+                            <button class="mini-btn btn-outline">DETAILS</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card" style="border-left-color: #5856D6;">
+                        <div class="order-meta">
+                            <span class="room-num" style="color: #5856D6;">ROOM 101</span>
+                            <span>2:42 PM</span>
+                        </div>
+                        <div class="order-content">Housekeeping: Extra Towels (x2)</div>
+                        <div class="order-btns">
+                            <button class="mini-btn btn-red" style="background: #5856D6;">COMPLETE</button>
+                            <button class="mini-btn btn-outline">DETAILS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation (Mobile) -->
+        <nav>
+            <a href="javascript:void(0)" class="nav-link active" onclick="showView('menu')">
+                <span class="nav-icon">🍴</span>
+                <span>MENU</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showView('orders')">
+                <span class="nav-icon">🔔</span>
+                <span>ORDERS</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-icon" style="color: var(--accent-orange); font-size: 32px;" onclick="alert('Add Item')">⊕</a>
+            <a href="javascript:void(0)" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span>STATS</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-link">
+                <span class="nav-icon">⚙️</span>
+                <span>SET</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        function handleToggle(el) {
+            const card = el.closest('.item-card');
+            card.classList.toggle('on');
+            card.classList.toggle('off');
+        }
+
+        function showView(viewName) {
+            const menuView = document.getElementById('menu-view');
+            const ordersView = document.getElementById('orders-view');
+            const navLinks = document.querySelectorAll('.nav-link, .sidebar-link');
+
+            // Reset views
+            menuView.style.display = 'none';
+            ordersView.style.display = 'none';
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Show selected view
+            if (viewName === 'menu') {
+                menuView.style.display = 'block';
+                document.querySelectorAll('[onclick="showView(\'menu\')"]').forEach(el => el.classList.add('active'));
+            } else if (viewName === 'orders') {
+                ordersView.style.display = 'block';
+                document.querySelectorAll('[onclick="showView(\'orders\')"]').forEach(el => el.classList.add('active'));
+            }
+        }
+    </script>
+</body>
+</html>

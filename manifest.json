@@ -1,0 +1,16 @@
+{
+  "name": "Omana Hotel Staff",
+  "short_name": "Omana Staff",
+  "start_url": "manager-portal.html",
+  "display": "standalone",
+  "background_color": "#0A0A0F",
+  "theme_color": "#0A0A0F",
+  "description": "Hotel management portal with real-time notifications.",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
