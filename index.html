@@ -794,28 +794,28 @@
 
     <!-- Chatbot Widget -->
     <div class="chatbot-widget" id="chatbot-widget">
-        <div class="chatbot-window glass" id="chatbot-window">
+        <div class="chatbot-window" id="chatbot-window">
             <div class="chatbot-header">
                 <div class="chatbot-title">
-                    <span class="logo-oye">Oye</span><span class="logo-hq">HQ</span> Assistant
+                    <div class="bot-icon">O</div>
+                    Ask OyeHQ
                 </div>
-                <button class="close-chat" id="close-chat"><i class="ph ph-x"></i></button>
+                <button class="close-chat" id="close-chat"><i class="ph ph-x-circle"></i></button>
             </div>
             <div class="chatbot-body" id="chatbot-body">
                 <div class="chat-message bot-message">
-                    Looking to automate your business with AI? I can guide you.
+                    <div class="msg-content">Hello! I am your OyeHQ AI assistant. How can I help you automate your business today?</div>
+                    <div class="msg-time">09:41 am</div>
                 </div>
             </div>
-            <div class="chatbot-options" id="chatbot-options">
-                <button class="chat-option-btn" data-reply="Yes, tell me more">Yes, tell me more</button>
-                <button class="chat-option-btn" data-reply="Just browsing">Just browsing</button>
-            </div>
-            <div class="chatbot-input-area" style="display: none;" id="wa-cta-area">
-                <a href="https://wa.me/1234567890?text=Hi,%20I%20want%20to%20automate%20my%20business%20using%20AI.%20Can%20you%20help%20me?" target="_blank" class="btn btn-primary btn-full">Continue on WhatsApp</a>
+            <div class="chatbot-input-footer">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="chat-send">Send</button>
             </div>
         </div>
         <button class="chatbot-trigger" id="chatbot-trigger">
-            <i class="ph ph-chat-teardrop-text"></i>
+            <div class="bot-icon-small">O</div>
+            <span>Ask OyeHQ</span>
         </button>
     </div>
 

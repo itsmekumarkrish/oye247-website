@@ -4,39 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatbotWindow = document.getElementById('chatbot-window');
     const closeChatBtn = document.getElementById('close-chat');
     const chatbotBody = document.getElementById('chatbot-body');
-    const chatbotOptions = document.getElementById('chatbot-options');
-    const waCtaArea = document.getElementById('wa-cta-area');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
 
     // Toggle Chatbot
     if (chatbotTrigger && chatbotWindow) {
-        if(chatbotTrigger)chatbotTrigger.addEventListener('click', () => {
-            chatbotWindow.classList.toggle('active');
-            if(chatbotWindow.classList.contains('active')) {
-                setTimeout(() => {
-                    chatbotWindow.style.display = 'flex';
-                }, 10);
-            } else {
-                setTimeout(() => {
-                    chatbotWindow.style.display = 'none';
-                }, 300);
-            }
-        });
-    }
-
-    if (closeChatBtn && chatbotWindow) {
-        if(closeChatBtn)closeChatBtn.addEventListener('click', () => {
-            chatbotWindow.classList.remove('active');
-            setTimeout(() => {
-                chatbotWindow.style.display = 'none';
-            }, 300);
-        });
-    }
-
-    if (chatbotWindow) chatbotWindow.style.display = 'none';
-    
-    if (chatbotTrigger && chatbotWindow) {
-        if(chatbotTrigger)chatbotTrigger.addEventListener('click', (e) => {
-            if(chatbotWindow.style.display === 'none') {
+        chatbotTrigger.addEventListener('click', () => {
+            if (chatbotWindow.style.display === 'none' || !chatbotWindow.style.display) {
                 chatbotWindow.style.display = 'flex';
                 void chatbotWindow.offsetWidth; 
                 chatbotWindow.classList.add('active');
@@ -49,117 +23,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (chatbotTrigger) {
-        const newTrigger = chatbotTrigger.cloneNode(true);
-        chatbotTrigger.replaceWith(newTrigger);
-        // We need to re-assign our reference and re-add listeners to the new node
-        const updatedTrigger = document.getElementById('chatbot-trigger');
-        if (updatedTrigger && chatbotWindow) {
-            updatedTrigger.addEventListener('click', (e) => {
-                if(chatbotWindow.style.display === 'none') {
-                    chatbotWindow.style.display = 'flex';
-                    void chatbotWindow.offsetWidth; 
-                    chatbotWindow.classList.add('active');
-                } else {
-                    chatbotWindow.classList.remove('active');
-                    setTimeout(() => {
-                        chatbotWindow.style.display = 'none';
-                    }, 300);
-                }
-            });
-        }
-    }
-    const newChatbotTrigger = document.getElementById('chatbot-trigger');
-    
-    newChatbotTrigger.addEventListener('click', () => {
-        if(chatbotWindow.classList.contains('active')) {
+    if (closeChatBtn && chatbotWindow) {
+        closeChatBtn.addEventListener('click', () => {
             chatbotWindow.classList.remove('active');
             setTimeout(() => {
                 chatbotWindow.style.display = 'none';
             }, 300);
-        } else {
-            chatbotWindow.style.display = 'flex';
-            setTimeout(() => {
-                chatbotWindow.classList.add('active');
-            }, 10);
-        }
-    });
-
-    // Chatbot Flow Logic
-    const chatFlow = {
-        question1: {
-            bot: "Great! What industry are you in?",
-            options: ["E-commerce", "SaaS / Tech", "Service Based", "Other"]
-        },
-        question2: {
-            bot: "Got it. How many leads do you typically get per month?",
-            options: ["Under 50", "50 - 200", "200+"]
-        },
-        final: {
-            bot: "Awesome. Our AI can definitely help you increase conversions. Let's chat on WhatsApp to see a quick demo tailored for you.",
-            options: [] // no options, show WA button
-        }
-    };
-
-    let currentStep = 0;
-
-    // Handle Option Clicks
-    chatbotOptions.addEventListener('click', (e) => {
-        if(e.target.classList.contains('chat-option-btn')) {
-            const userReply = e.target.getAttribute('data-reply');
-            addUserMessage(userReply);
-            
-            // Disable options temporarily
-            chatbotOptions.innerHTML = '';
-            
-            // Determine next bot message
-            setTimeout(() => {
-                if(currentStep === 0) {
-                    addBotMessage(chatFlow.question1.bot);
-                    renderOptions(chatFlow.question1.options);
-                    currentStep++;
-                } else if (currentStep === 1) {
-                    addBotMessage(chatFlow.question2.bot);
-                    renderOptions(chatFlow.question2.options);
-                    currentStep++;
-                } else if (currentStep === 2) {
-                    addBotMessage(chatFlow.final.bot);
-                    waCtaArea.style.display = 'block';
-                    currentStep++;
-                }
-            }, 800);
-        }
-    });
-
-    function addUserMessage(text) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-message user-message';
-        msgDiv.textContent = text;
-        chatbotBody.appendChild(msgDiv);
-        scrollToBottom();
-    }
-
-    function addBotMessage(text) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-message bot-message';
-        msgDiv.textContent = text;
-        chatbotBody.appendChild(msgDiv);
-        scrollToBottom();
-    }
-
-    function renderOptions(optionsArray) {
-        chatbotOptions.innerHTML = '';
-        optionsArray.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.className = 'chat-option-btn';
-            btn.setAttribute('data-reply', opt);
-            btn.textContent = opt;
-            chatbotOptions.appendChild(btn);
         });
     }
 
-    function scrollToBottom() {
+    // Chat Message Logic
+    function addMessage(text, sender = 'bot') {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-message ${sender}-message`;
+        
+        const now = new Date();
+        const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
+        
+        msgDiv.innerHTML = `
+            <div class="msg-content">${text}</div>
+            <div class="msg-time">${time}</div>
+        `;
+        
+        chatbotBody.appendChild(msgDiv);
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+
+    function handleChat() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        
+        addMessage(text, 'user');
+        chatInput.value = '';
+        
+        // Simple Bot Response Simulation
+        setTimeout(() => {
+            let response = "I'm processing that for you. Would you like to see a custom demo of how our AI can help your specific business?";
+            if (text.toLowerCase().includes('price') || text.toLowerCase().includes('cost')) {
+                response = "Our automation plans are customized based on your business volume. I can get you a personalized quote if you share your business type!";
+            } else if (text.toLowerCase().includes('hi') || text.toLowerCase().includes('hello')) {
+                response = "Hello! I'm the OyeHQ AI assistant. How can I help you automate your growth today?";
+            }
+            addMessage(response, 'bot');
+        }, 1000);
+    }
+
+    if (chatSend) chatSend.addEventListener('click', handleChat);
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChat();
+        });
     }
 
     // Smooth Scroll Offset for Navbar
@@ -168,16 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = this.getAttribute('href');
             if(targetId === '#') return;
             
+            e.preventDefault();
             const targetElement = document.querySelector(targetId);
-            if(targetElement) {
-                e.preventDefault();
-                const headerOffset = 100; // approximate navbar height + breathing room
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
+            if (targetElement) {
+                const navHeight = 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 window.scrollTo({
-                     top: offsetPosition,
-                     behavior: "smooth"
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
