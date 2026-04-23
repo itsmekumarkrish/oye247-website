@@ -1066,11 +1066,11 @@ section {
 
 .floating-group label {
     position: absolute;
-    top: 50%;
+    top: 42%;
     left: 1.2rem;
     transform: translateY(-50%);
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.85);
     pointer-events: none;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     font-family: 'Inter', sans-serif;
@@ -2638,6 +2638,7 @@ body.modal-open {
 /* --- Mandatory Field Indicators --- */
 .required {
     color: #FF4D4D !important;
-    font-weight: 800;
+    font-weight: 900;
     margin-left: 2px;
+    font-size: 1.1rem;
 }
