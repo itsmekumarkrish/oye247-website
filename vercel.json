@@ -44,10 +44,6 @@
       "dest": "contact.html"
     },
     {
-      "src": "/proposal",
-      "dest": "proposal.html"
-    },
-    {
       "src": "/style.css",
       "dest": "style.css"
     },
